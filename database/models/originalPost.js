@@ -1,6 +1,14 @@
 'use strict';
 
-const { STRING, BOOLEAN, INTEGER, TEXT } = require('sequelize');
+const {
+  STRING,
+  BOOLEAN,
+  INTEGER,
+  TEXT,
+  FLOAT,
+  ARRAY,
+  DOUBLE,
+} = require('sequelize');
 const db = require('../database');
 
 module.exports = db.define('originalPosts', {
@@ -13,4 +21,5 @@ module.exports = db.define('originalPosts', {
   picture: {
     type: TEXT,
   },
+  location: ARRAY(DOUBLE),
 });

@@ -105,6 +105,7 @@ originalPosts = [
     picture:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf2qwUV3gL71did5ydYf4hIifEx0_2g0ZvqlIFY8ptQXyP9SiaTA',
     issuedFromId: 1,
+    location: [-74.007624, 40.705137],
   },
 ];
 

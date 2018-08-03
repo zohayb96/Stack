@@ -24,7 +24,7 @@ import Render from './components/Render';
 const RootNavigator = createStackNavigator(
   {
     Main: {
-      screen: Home,
+      screen: MapToView,
       navigationOptions: ({ navigation }) => ({
         header: null,
         title: `AR Mappr`,

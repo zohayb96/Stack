@@ -69,9 +69,9 @@ connect(
 export default createBottomTabNavigator(
   {
     Friends: { screen: AllUsers },
-    Profile: { screen: UserProfile },
-    Add: { screen: AddToMap },
     Map: { screen: MapToView },
+    Add: { screen: AddToMap },
+    Profile: { screen: UserProfile },
     Settings: { screen: Settings },
   },
   {

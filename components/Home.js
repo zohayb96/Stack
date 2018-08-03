@@ -15,13 +15,13 @@ const Home = ({ navigation }) => (
       style={styles.loginButtonStyle}
       onPress={() => navigation.navigate(`LoginForm`)}
     >
-      <Text>Login</Text>
+      <Text style={styles.textStyle}>Login</Text>
     </TouchableOpacity>
     <TouchableOpacity
       style={styles.signUpButtonStyle}
       onPress={() => navigation.navigate(`SignUp`)}
     >
-      <Text>Sign Up</Text>
+      <Text style={styles.textStyle}>Sign Up</Text>
     </TouchableOpacity>
     <Text style={styles.rightsText}>All Rights Reserved</Text>
   </View>
@@ -32,10 +32,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: `center`,
     justifyContent: `center`,
-    backgroundColor: '#7289da',
+    backgroundColor: '#36576a',
   },
   textStyle: {
-    color: 'white',
+    color: '#071229',
     fontSize: 24,
     justifyContent: 'flex-start',
   },
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   loginButtonStyle: {
-    backgroundColor: '#99aab5',
+    backgroundColor: '#FFFFFF',
     borderRadius: 5,
     borderWidth: 1,
     marginLeft: 5,
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
   signUpButtonStyle: {
     // alignSelf: 'stretch',
-    backgroundColor: '#99aab5',
+    backgroundColor: '#FFFFFF',
     borderRadius: 5,
     borderWidth: 1,
     marginLeft: 5,
