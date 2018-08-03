@@ -165,7 +165,7 @@ export default class Render extends Component {
     //
     const cube = new THREE.Mesh(cubeGeometry, surprisedMaterial);
     cube.name = 'cube';
-    var sphere = new THREE.Mesh(SphereGeometry, surprisedMaterial);
+    var sphere = new THREE.Mesh(SphereGeometry, glassMaterial);
 
     // Add Object To Scene (Render it)
     scene.add(cube);

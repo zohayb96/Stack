@@ -8,9 +8,9 @@ const morgan = require('morgan');
 router.use(express.static(path.join(__dirname, '..', 'public')));
 
 router.use('/users', require('./users'));
-// router.use('/posts', require('./posts'));
+router.use('/posts', require('./posts'));
 router.use('/auth', require('./auth'));
-// router.use('/oPosts', require('./oPosts'));
+router.use('/oPosts', require('./oPosts'));
 // // For all GET requests that aren't to an API route,
 // // we will send the index.html!
 // router.get('/*', (req, res, next) => {

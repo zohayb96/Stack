@@ -6,8 +6,10 @@ const OriginalPost = require('./models/originalPost');
 const db = require('./database');
 
 OriginalPost.belongsTo(Users, { as: 'issuedFrom' });
+OriginalPost.hasMany(Posts);
+// opost has many posts
 Posts.belongsTo(Users, { as: 'issuedTo' });
-Posts.belongsTo(OriginalPost, { as: 'response' });
+Posts.belongsTo(OriginalPost, { as: 'originalPost' });
 
 module.exports = {
   db,

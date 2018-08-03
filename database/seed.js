@@ -75,15 +75,6 @@ newUsers = [
       'https://honnaimg.elwatannews.com/image_archive/840x601/5931972721516896299.jpg',
     password: '123',
   },
-  {
-    firstName: 'Erum',
-    lastName: 'Nadeem',
-    username: 'erum',
-    email: 'erum@email.com',
-    picture:
-      'https://media.indiatimes.in/media/content/itimes/blog/2014/Jul/10/1404992999-10-things-you-didnt-know-about-alia-bhatt.jpg',
-    password: '123',
-  },
 ];
 
 newPosts = [
@@ -93,7 +84,7 @@ newPosts = [
     responsePicture:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf2qwUV3gL71did5ydYf4hIifEx0_2g0ZvqlIFY8ptQXyP9SiaTA',
     responseText: 'Was Cool',
-    responseId: 1,
+    originalPostId: 1,
     responseRating: 77,
   },
 ];
