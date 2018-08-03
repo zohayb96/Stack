@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: `center`,
     justifyContent: `center`,
-    backgroundColor: '#2d3d54',
+    backgroundColor: '#7289da',
   },
   textStyle: {
     color: 'white',
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   loginButtonStyle: {
-    backgroundColor: '#009a9a',
+    backgroundColor: '#99aab5',
     borderRadius: 5,
     borderWidth: 1,
     marginLeft: 5,
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
   signUpButtonStyle: {
     // alignSelf: 'stretch',
-    backgroundColor: '#009a9a',
+    backgroundColor: '#99aab5',
     borderRadius: 5,
     borderWidth: 1,
     marginLeft: 5,

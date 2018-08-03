@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import UserDetail from './UserDetail';
 import {
@@ -7,24 +8,39 @@ import {
   TabBarBottom,
   StackNavigator,
 } from 'react-navigation';
+import fetchAllFriends from '../app/users';
 import { Provider } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 import Home from './Home';
 import UserProfile from './UserProfile';
-import MapHome from './MapHome';
+import AddToMap from './AddToMap';
+import MapToView from './MapView';
+import Settings from './Settings';
 
 class AllUsers extends Component {
   state = {
-    users: [],
+    allFriends: [],
     user: {},
   };
 
   async componentWillMount() {
-    console.log(this.props);
+    const { navigation } = this.props;
+    const userId = navigation.getParam('user');
+    console.log('user: ', userId);
+    const response = await axios.get(
+      `http://localhost:1337/api/users/friends/${userId.id}`
+    );
+    this.setState({
+      allFriends: response.data,
+      user: userId,
+    });
+    console.log(this.state);
   }
 
   renderUsers() {
-    return this.state.users.map(user => <User key={user.id} user={user} />);
+    return this.state.allFriends.map(user => (
+      <UserDetail key={user.id} user={user} />
+    ));
   }
 
   render() {
@@ -33,15 +49,30 @@ class AllUsers extends Component {
   }
 }
 
-// export const rootStack = StackNavigator({
-//   IndividualUser: { screen: IndividualUser },
-// });
+const mapStateToProps = state => {
+  return {
+    allFriends: state.user.allFriends,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  fetchAllFriends: () => {
+    dispatch(fetchAllFriends());
+  },
+});
+
+connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AllUsers);
 
 export default createBottomTabNavigator(
   {
     Friends: { screen: AllUsers },
     Profile: { screen: UserProfile },
-    MapHome: { screen: MapHome },
+    Add: { screen: AddToMap },
+    Map: { screen: MapToView },
+    Settings: { screen: Settings },
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -52,8 +83,12 @@ export default createBottomTabNavigator(
           iconName = `ios-contact${focused ? '' : '-outline'}`;
         } else if (routeName === 'Friends') {
           iconName = `ios-contacts${focused ? '' : '-outline'}`;
-        } else if (routeName === 'MapHome') {
-          iconName = `ios-contacts${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Add') {
+          iconName = `ios-add-circle${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Map') {
+          iconName = `ios-map${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Settings') {
+          iconName = `ios-settings${focused ? '' : '-outline'}`;
         }
         return <Ionicons name={iconName} size={25} color={tintColor} />;
       },

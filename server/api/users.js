@@ -25,9 +25,6 @@ router.get('/:id', async function(req, res, next) {
       where: {
         id: req.params.id,
       },
-      // include: {
-      //   model: Chall,
-      // },
     });
     res.json(user);
   } catch (error) {
