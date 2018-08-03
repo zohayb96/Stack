@@ -1,27 +1,22 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import Button from './Button';
+import Container from './Container';
 import { StackNavigator } from 'react-navigation';
 
-const Home = ({ navigation }) => (
+const MapHome = ({ navigation }) => (
   <View style={styles.container}>
     <TouchableOpacity
-      style={styles.loginButtonStyle}
-      onPress={() => navigation.navigate(`LoginForm`)}
+      style={styles.postButtonStyle}
+      onPress={() => navigation.navigate(`AddToMap`)}
     >
-      <Text>Login</Text>
+      <Text style={styles.textStyle}>Add To Map</Text>
     </TouchableOpacity>
     <TouchableOpacity
-      style={styles.signUpButtonStyle}
-      onPress={() => navigation.navigate(`SignUp`)}
+      style={styles.mapButtonStyle}
+      onPress={() => navigation.navigate(`MapToView`)}
     >
-      <Text>Sign Up</Text>
+      <Text style={styles.textStyle}>View Map</Text>
     </TouchableOpacity>
     <Text style={styles.rightsText}>All Rights Reserved</Text>
   </View>
@@ -32,10 +27,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: `center`,
     justifyContent: `center`,
-    backgroundColor: '#2d3d54',
+    backgroundColor: '#32324e',
   },
   textStyle: {
-    color: 'white',
+    color: '#FFFFFF',
     fontSize: 24,
     justifyContent: 'flex-start',
   },
@@ -45,27 +40,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 10,
   },
-  loginButtonStyle: {
+  postButtonStyle: {
     // alignSelf: 'stretch',
-    backgroundColor: '#009a9a',
-    borderRadius: 5,
-    borderWidth: 1,
+    backgroundColor: '#191938',
     marginLeft: 5,
     marginRight: 5,
     width: 200,
     height: 50,
     alignItems: `center`,
     justifyContent: `center`,
+    marginBottom: 20,
   },
   thumbnailStyle: {
     height: 300,
     width: 300,
   },
-  signUpButtonStyle: {
-    // alignSelf: 'stretch',
-    backgroundColor: '#009a9a',
-    borderRadius: 5,
-    borderWidth: 1,
+  mapButtonStyle: {
+    backgroundColor: '#c10000',
     marginLeft: 5,
     marginRight: 5,
     width: 200,
@@ -75,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default MapHome;

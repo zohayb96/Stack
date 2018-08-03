@@ -7,7 +7,7 @@ const pkg = require('../package');
 console.log(chalk.yellow('Opening database connection'));
 
 // create the database instance that can be used in other database files
-const db = new Sequelize(`postgres://localhost:5432/awesome`, {
+const db = new Sequelize(`postgres://localhost:5432/stackathon`, {
   logging: false, // so we don't see all the SQL queries getting made
 });
 

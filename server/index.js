@@ -3,10 +3,10 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const { db } = require('./../database');
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 1337;
 const app = express();
 const server = app.listen(PORT, () =>
-  console.log(`Welcome to Awesome ${PORT}`)
+  console.log(`Welcome to AR Mappr ${PORT}`)
 );
 
 module.exports = app;

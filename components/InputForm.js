@@ -23,6 +23,9 @@ const defaultState = {
   postText: '',
   postPicture: null,
   locationText: '',
+  latitude: null,
+  longitude: null,
+  error: null,
 };
 
 class InputForm extends Component {
@@ -33,6 +36,20 @@ class InputForm extends Component {
       postPicture: null,
       locationText: '',
     };
+  }
+
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        this.setState({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          error: null,
+        });
+      },
+      error => this.setState({ error: error.message }),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
   }
 
   async componentWillMount() {
@@ -66,6 +83,7 @@ class InputForm extends Component {
   };
 
   render() {
+    console.log(this.state);
     const { navigate } = this.props;
     let { postPicture } = this.state;
     return (
