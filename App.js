@@ -18,11 +18,12 @@ console.disableYellowBox = true;
 import AddToMap from './components/AddToMap';
 import MapToView from './components/MapView';
 import Render from './components/Render';
+// import ARView from './components/ARView';
 
 const RootNavigator = createStackNavigator(
   {
     Main: {
-      screen: Home,
+      screen: AllUsers,
       navigationOptions: ({ navigation }) => ({
         header: null,
         title: `AR Mappr`,
@@ -92,6 +93,11 @@ const RootNavigator = createStackNavigator(
   },
   {
     initialRouteName: `Main`,
+  },
+  {
+    navigationOptions: {
+      header: 'none',
+    },
   }
 );
 

@@ -19,7 +19,9 @@ class AllUsers extends Component {
     user: {},
   };
 
-  async componentWillMount() {}
+  async componentWillMount() {
+    console.log(this.props);
+  }
 
   renderUsers() {
     return this.state.users.map(user => <User key={user.id} user={user} />);
@@ -39,9 +41,7 @@ export default createBottomTabNavigator(
   {
     Friends: { screen: AllUsers },
     Profile: { screen: UserProfile },
-    MapHome: {
-      screen: MapHome,
-    },
+    MapHome: { screen: MapHome },
   },
   {
     navigationOptions: ({ navigation }) => ({

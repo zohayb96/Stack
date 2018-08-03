@@ -1,11 +1,21 @@
-import Expo from 'expo';
 import * as THREE from 'three';
 import ExpoTHREE from 'expo-three';
 import React, { Component } from 'react';
-import { View, Text, Dimensions } from 'react-native';
 import Button from './Button';
 import Container from './Container';
 import DropdownMenu from 'react-native-dropdown-menu';
+import Expo, { Asset } from 'expo';
+require('../utils/OBJLoader');
+import {
+  View,
+  NativeModules,
+  StatusBar,
+  StyleSheet,
+  Dimensions,
+  Image,
+  Text,
+} from 'react-native';
+const { _getLocationAsync } = require('../utils');
 
 console.disableYellowBox = true;
 
@@ -20,15 +30,20 @@ export default class Render extends Component {
     const postText = navigation.getParam('postText', 'none');
     const locationText = navigation.getParam('locationText', 'none');
     const customImage = navigation.getParam('sentImage', null);
-    // let imageToUse = '';
-    // if (customImage !== null) {
-    //   imageToUse = customImage;
-    // } else {
-    //   imageToUse = '';
-    // }
+    let imageToUse = '';
+    if (customImage !== null) {
+      imageToUse = customImage;
+    } else {
+      imageToUse = '';
+    }
+    console.log(imageToUse);
 
     return (
       <View style={{ flex: 1 }}>
+        <Expo.GLView
+          style={{ flex: 1 }}
+          onContextCreate={this._onGLContextCreate}
+        />
         <Container>
           <Text>Post: {postText}</Text>
         </Container>
@@ -36,21 +51,27 @@ export default class Render extends Component {
           <Text>Location: {locationText}</Text>
         </Container>
         <Container>
+          <Container>
+            <Image
+              source={{ uri: imageToUse }}
+              style={{
+                height: 50,
+                width: 50,
+              }}
+            />
+          </Container>
           <Button onPress={this.changeEmoji}>Happy</Button>
           <Button onPress={this.changeEmoji}>Love</Button>
           <Button onPress={this.changeEmoji}>Custom</Button>
           <Button onPress={this.changeEmoji}>Surprise</Button>
           <Button onPress={this.changeEmoji}>Angry</Button>
         </Container>
-        <Expo.GLView
-          style={{ flex: 1 }}
-          onContextCreate={this._onGLContextCreate}
-        />
       </View>
     );
   }
   _onGLContextCreate = async gl => {
     // Start AR session
+    // Expo.GLView.startARSession();
     // Do graphics stuff here!
     var scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -76,15 +97,15 @@ export default class Render extends Component {
     rightLight.position.set(3, 5, 0).normalize();
     bottomLight.position.set(0, -5, 0).normalize();
     // Ambient Lighting
-    // var ambient = new THREE.AmbientLight(0x555555);
-    // scene.add(ambient);
+    var ambient = new THREE.AmbientLight(0x555555);
+    scene.add(ambient);
 
     // Add Lighting to Scene
     scene.add(leftLight);
     scene.add(rightLight);
     scene.add(bottomLight);
     // Background
-    scene.background = new THREE.Color(0xffffff);
+    scene.background = new THREE.Color(0x9bd1e1);
     // Define Material
     const material = new THREE.MeshPhongMaterial({
       color: '#003E74',
@@ -134,7 +155,7 @@ export default class Render extends Component {
     // textureLoader.crossOrigin =
     //   'https://i.forbesimg.com/media/lists/companies/coca-cola-european-partners_416x416.jpg';
 
-    const myUrl = '';
+    const myUrl = this.imageToUse;
     // TextureLoader
     var loader = new THREE.TextureLoader();
     var myTexture = loader.load(myUrl);

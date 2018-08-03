@@ -8,7 +8,7 @@ import InputForm from './InputForm';
 import ImagePicker from './ImagePicker';
 import Button from './Button';
 
-class AddChallenge extends Component {
+class AddToMap extends Component {
   state = {
     challenges: [],
   };
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddChallenge;
+export default AddToMap;
