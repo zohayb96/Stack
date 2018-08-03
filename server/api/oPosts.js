@@ -17,6 +17,24 @@ router.get('/', async (req, res, next) => {
 });
 
 // Get own create original posts
+router.get('/sub/:id', async (req, res, next) => {
+  const issuerId = req.params.id;
+  try {
+    const ownPost = await OriginalPost.findOne({
+      where: {
+        issuedFromId: issuerId,
+      },
+    });
+    const subPosts = await ownPost.getPosts({
+      include: [{ model: Users, as: 'issuedTo' }],
+    });
+    res.json(subPosts);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Get own create original posts
 router.get('/:id', async (req, res, next) => {
   const issuerId = req.params.id;
   try {

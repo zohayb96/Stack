@@ -19,8 +19,10 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+// USER PROFILE ROUTES
+
 // Get posts sent to user // accepted is false
-router.get('/:id', async (req, res, next) => {
+router.get('/pending/:id', async (req, res, next) => {
   const issuerToId = req.params.id;
   try {
     const allPosts = await Posts.findAll({
@@ -30,8 +32,52 @@ router.get('/:id', async (req, res, next) => {
       ],
       where: {
         issuedToId: issuerToId,
-        //   accepted: false,
+        accepted: false,
         // },
+      },
+    });
+    res.json(allPosts);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Get posts sent to user // accepted is true
+router.get('/accepted/:id', async (req, res, next) => {
+  const issuerToId = req.params.id;
+  try {
+    const allPosts = await Posts.findAll({
+      include: [
+        { model: Users, as: 'issuedTo' },
+        { model: OriginalPost, as: 'originalPost' },
+      ],
+      where: {
+        issuedToId: issuerToId,
+        accepted: true,
+        responseRating: null,
+        // },
+      },
+    });
+    res.json(allPosts);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/completed/:id', async (req, res, next) => {
+  const issuerToId = req.params.id;
+  try {
+    const allPosts = await Posts.findAll({
+      include: [
+        { model: Users, as: 'issuedTo' },
+        { model: OriginalPost, as: 'originalPost' },
+      ],
+      where: {
+        issuedToId: issuerToId,
+        accepted: true,
+        responseRating: {
+          $ne: null,
+        },
       },
     });
     res.json(allPosts);

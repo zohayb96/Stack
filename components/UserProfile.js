@@ -14,10 +14,15 @@ import { Ionicons } from '@expo/vector-icons';
 import TopContainer from './TopContainer';
 import Container from './Container';
 import { createStackNavigator } from 'react-navigation';
+import CreatedPostDetail from './CreatedPostDetail';
+import { withNavigation } from 'react-navigation';
+import { create } from 'gl-matrix/src/gl-matrix/mat3';
 
 class UserProfile extends Component {
   state = {
-    users: [],
+    user: [],
+    createdOriginalPosts: [],
+    completedPosts: [],
   };
 
   static navigationOptions = {
@@ -27,11 +32,43 @@ class UserProfile extends Component {
   async componentWillMount() {
     const { navigation } = this.props;
     const user = navigation.getParam('user');
-    console.log(this.state);
+    const userData = await axios.get(
+      `http://172.16.21.129:1337/api/users/${user.id}`
+    );
+    const createdOriginalPostsData = await axios.get(
+      `http://172.16.21.129:1337/api/Oposts/${user.id}`
+    );
+    const completedPostsData = await axios.get(
+      `http://172.16.21.129:1337/api/posts/completed/${user.id}`
+    );
+    this.setState({
+      user: userData.data,
+      createdOriginalPosts: createdOriginalPostsData.data,
+      completedPosts: completedPostsData.data,
+    });
+  }
+
+  renderCreated() {
+    if (this.state.createdOriginalPosts !== null) {
+      return [this.state.createdOriginalPosts].map(createdPost => (
+        <CreatedPostDetail key={createdPost.id} posts={createdPost} />
+      ));
+    }
+    console.log('pressed');
+  }
+
+  renderCompleted() {
+    return this.state.completedPosts.map(challenge => (
+      <CreatedPostDetail
+        key={challenge.id}
+        user={this.state.users}
+        challenges={challenge}
+      />
+    ));
   }
 
   render() {
-    console.log(this.props);
+    console.log('createdOriginalPosts: ', this.state.createdOriginalPosts);
     const { navigate } = this.props.navigation;
     const {
       firstName,
@@ -41,13 +78,53 @@ class UserProfile extends Component {
       picture,
       image,
       url,
-    } = this.state.users;
+    } = this.state.user;
     return (
-      <TopContainer>
+      <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
         <Container>
-          <Text>Welcome {firstName}</Text>
+          <View style={styles.thumbnailContainerStyle}>
+            <Image style={styles.thumbnailStyle} source={{ uri: picture }} />
+            <Container>
+              <Text style={styles.headerTextStyle}>
+                {firstName + ' ' + lastName}
+              </Text>
+            </Container>
+            <View>
+              <TouchableOpacity
+                style={styles.buttonStyle}
+                onPress={() => this.props.navigation.navigate(`EditUser`)}
+              >
+                <Text style={styles.buttonTextStyle}>Edit</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </Container>
-      </TopContainer>
+        <SegmentedControlIOS
+          values={['Created', 'Completed']}
+          selectedIndex={0}
+          tintColor={'#2d3d54'}
+          selectedIndex={this.state.selectedIndex}
+          onChange={event => {
+            this.setState({
+              selectedIndex: event.nativeEvent.selectedSegmentIndex,
+            });
+          }}
+          marginTop={5}
+          marginBottom={5}
+        />
+        {this.state.selectedIndex === 0 ? (
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            {this.renderCreated()}
+          </ScrollView>
+        ) : this.state.selectedIndex === 1 ? (
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            {this.renderCompleted()}
+          </ScrollView>
+        ) : // <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        //   {this.renderPending()}
+        // </ScrollView>
+        null}
+      </View>
     );
   }
 }
@@ -97,4 +174,4 @@ const styles = {
   },
 };
 
-export default UserProfile;
+export default withNavigation(UserProfile);
