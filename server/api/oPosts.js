@@ -8,7 +8,35 @@ const router = require('express').Router();
 router.get('/', async (req, res, next) => {
   try {
     const allOriginalPosts = await OriginalPost.findAll({
-      include: [{ model: Posts }],
+      include: [
+        { model: Posts },
+        {
+          model: Users,
+          as: 'issuedFrom',
+        },
+      ],
+    });
+    res.json(allOriginalPosts);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Get all data with accepted true - to be viewed by users on map
+router.get('/forUsers', async (req, res, next) => {
+  try {
+    const allOriginalPosts = await OriginalPost.findAll({
+      include: [
+        {
+          model: Posts,
+          where: { accepted: true },
+          required: false,
+        },
+        {
+          model: Users,
+          as: 'issuedFrom',
+        },
+      ],
     });
     res.json(allOriginalPosts);
   } catch (err) {

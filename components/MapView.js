@@ -1,10 +1,12 @@
 import React from 'react';
 import MapView from 'react-native-maps';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { Marker } from 'react-native-maps';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { Marker, Callout } from 'react-native-maps';
 import axios from 'axios';
+import { withNavigation } from 'react-navigation';
+import SinglePost from './SinglePost';
 
-export default class MapToView extends React.Component {
+class MapToView extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -13,7 +15,6 @@ export default class MapToView extends React.Component {
       latitudeDelta: 0.01,
       longitudeDelta: 0.01,
       allPosts: [],
-      reRender: false,
     };
   }
 
@@ -30,7 +31,7 @@ export default class MapToView extends React.Component {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
     const response = await axios.get(
-      `http://10.2.2.38:1337/api/oPosts/justPosts`
+      `http://10.2.2.38:1337/api/oPosts/forUsers`
     );
     this.setState({
       allPosts: response.data,
@@ -38,7 +39,7 @@ export default class MapToView extends React.Component {
   }
 
   render() {
-    console.log('allPosts: ', this.state.allPosts);
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <MapView
@@ -93,6 +94,11 @@ export default class MapToView extends React.Component {
                   ', Rated: ' +
                   marker.rating
                 }
+                onPress={() => {
+                  this.props.navigation.navigate('SinglePost', {
+                    post: { marker },
+                  });
+                }}
               >
                 {/* <Image
                   source={{ uri: marker.picture }}
@@ -106,7 +112,6 @@ export default class MapToView extends React.Component {
     );
   }
 }
-
 var styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -130,3 +135,5 @@ var styles = StyleSheet.create({
 //   ('subtitle: ', this.state.allPosts[0].rating)
 // )
 // : console.log('no posts');
+
+export default withNavigation(MapToView);

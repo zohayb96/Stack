@@ -19,6 +19,7 @@ console.disableYellowBox = true;
 import AddToMap from './components/AddToMap';
 import MapToView from './components/MapView';
 import Render from './components/Render';
+import SinglePost from './components/SinglePost';
 // import ARView from './components/ARView';
 
 const RootNavigator = createStackNavigator(
@@ -89,6 +90,12 @@ const RootNavigator = createStackNavigator(
       screen: MapHome,
       navigationOptions: ({ navigation }) => ({
         title: `MapHome`,
+      }),
+    },
+    SinglePost: {
+      screen: SinglePost,
+      navigationOptions: ({ navigation }) => ({
+        title: `SinglePost`,
       }),
     },
   },
