@@ -113,7 +113,7 @@ export default class RenderLove extends Component {
     // LOVE MATERIAL
     const loveMaterial = new THREE.MeshBasicMaterial({
       map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../public/hearts.jpg')),
+        asset: Expo.Asset.fromModule(require('../public/love.jpg')),
       }),
       transparent: true,
     });
@@ -129,7 +129,7 @@ export default class RenderLove extends Component {
     // Smiling MATERIAL
     const loveEmojiMaterial = new THREE.MeshBasicMaterial({
       map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../public/love.jpg')),
+        asset: Expo.Asset.fromModule(require('../public/hearts.jpg')),
       }),
       transparent: true,
     });

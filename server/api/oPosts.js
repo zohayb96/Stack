@@ -16,6 +16,22 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/justPosts', async (req, res, next) => {
+  try {
+    const allOriginalPosts = await OriginalPost.findAll({
+      include: [
+        {
+          model: Users,
+          as: 'issuedFrom',
+        },
+      ],
+    });
+    res.json(allOriginalPosts);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Get own create original posts
 router.get('/sub/:id', async (req, res, next) => {
   const issuerId = req.params.id;

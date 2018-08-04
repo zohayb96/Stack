@@ -121,7 +121,7 @@ export default class RenderAngry extends Component {
     // Happy MATERIAL
     const angryMaterial = new THREE.MeshBasicMaterial({
       map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../public/angry.jpg')),
+        asset: Expo.Asset.fromModule(require('../public/mad.jpg')),
       }),
       transparent: true,
     });

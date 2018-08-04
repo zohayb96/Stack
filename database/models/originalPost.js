@@ -7,7 +7,7 @@ const {
   TEXT,
   FLOAT,
   ARRAY,
-  DOUBLE,
+  DECIMAL,
 } = require('sequelize');
 const db = require('../database');
 
@@ -21,5 +21,5 @@ module.exports = db.define('originalPosts', {
   picture: {
     type: TEXT,
   },
-  location: ARRAY(DOUBLE),
+  location: ARRAY(DECIMAL),
 });

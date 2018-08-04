@@ -37,7 +37,7 @@ class LoginForm extends Component {
 
   async handleSubmit(evt) {
     try {
-      const response = await axios.put(`http://localhost:1337/api/auth/login`, {
+      const response = await axios.put(`http://10.2.2.38:1337/api/auth/login`, {
         username: this.state.username,
         password: this.state.password,
       });

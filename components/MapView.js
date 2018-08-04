@@ -1,6 +1,6 @@
 import React from 'react';
 import MapView from 'react-native-maps';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { Marker } from 'react-native-maps';
 import axios from 'axios';
 
@@ -29,7 +29,9 @@ export default class MapToView extends React.Component {
       error => this.setState({ error: error.message }),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
-    const response = await axios.get(`http://localhost:1337/api/oPosts`);
+    const response = await axios.get(
+      `http://10.2.2.38:1337/api/oPosts/justPosts`
+    );
     this.setState({
       allPosts: response.data,
     });
@@ -42,11 +44,12 @@ export default class MapToView extends React.Component {
         <MapView
           ref={MapView => (this.MapView = MapView)}
           style={styles.map}
-          provider="google"
+          // provider="google"
           loadingEnabled={true}
           loadingIndicatorColor="#666666"
           loadingBackgroundColor="#eeeeee"
           showsUserLocation={true}
+          showsPointsOfInterest={false}
           initialRegion={{
             latitude: 40.73061,
             longitude: -73.935242,
@@ -60,15 +63,7 @@ export default class MapToView extends React.Component {
             longitudeDelta: this.state.longitudeDelta,
           }}
         >
-          <MapView.Marker
-            coordinate={{
-              latitude: 40.7306099999999986,
-              longitude: -73.9352420000000023,
-            }}
-            // title={'hello'}
-            // description={'sure'}
-          />;
-          {this.state.allPosts.map(post => {
+          {/* {this.state.allPosts.map(post => {
             console.log(post);
             <MapView.Marker
               key={post.id}
@@ -79,6 +74,32 @@ export default class MapToView extends React.Component {
               title={post.text}
               description={post.text}
             />;
+          })} */}
+          {this.state.allPosts.map(marker => {
+            return (
+              <MapView.Marker
+                key={marker.id}
+                coordinate={{
+                  latitude: Number(marker.location[0]),
+                  longitude: Number(marker.location[1]),
+                }}
+                // image={require('../public/fireMarker.png')}
+                title={marker.text}
+                description={
+                  'Created by: ' +
+                  marker.issuedFrom.firstName +
+                  ' ' +
+                  marker.issuedFrom.lastName +
+                  ', Rated: ' +
+                  marker.rating
+                }
+              >
+                {/* <Image
+                  source={{ uri: marker.picture }}
+                  style={{ width: 20, height: 20 }}
+                /> */}
+              </MapView.Marker>
+            );
           })}
         </MapView>
       </View>
