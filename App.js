@@ -23,6 +23,7 @@ import SinglePost from './components/SinglePost';
 import CreatedPostDetail from './components/CreatedPostDetail';
 import SeeCreatedPostDetail from './components/SeeCreatedPostDetail';
 import SeeCompletedPostDetail from './components/SeeCompletedPostDetail';
+import SeePendingPostDetail from './components/SeePendingPostDetail';
 // import ARView from './components/ARView';
 
 const RootNavigator = createStackNavigator(
@@ -109,6 +110,12 @@ const RootNavigator = createStackNavigator(
     },
     SeeCompletedPostDetail: {
       screen: SeeCompletedPostDetail,
+      navigationOptions: ({ navigation }) => ({
+        title: `See More`,
+      }),
+    },
+    SeePendingPostDetail: {
+      screen: SeePendingPostDetail,
       navigationOptions: ({ navigation }) => ({
         title: `See More`,
       }),

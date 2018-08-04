@@ -29,7 +29,12 @@ router.get('/forUsers', async (req, res, next) => {
       include: [
         {
           model: Posts,
-          where: { accepted: true },
+          where: {
+            accepted: true,
+            responseRating: {
+              $ne: null,
+            },
+          },
           required: false,
           include: [
             {

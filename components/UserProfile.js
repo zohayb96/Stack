@@ -25,6 +25,7 @@ class UserProfile extends Component {
     createdOriginalPosts: [],
     completedPosts: [],
     pendingPosts: [],
+    selectedIndex: 0,
   };
 
   static navigationOptions = {
@@ -44,7 +45,7 @@ class UserProfile extends Component {
       `http://172.16.26.75:1337/api/posts/completed/${user.id}`
     );
     const pendingPostData = await axios.get(
-      `http://172.16.26.75:1337/api/posts/completed/${user.id}`
+      `http://172.16.26.75:1337/api/posts/pending/${user.id}`
     );
     this.setState({
       user: userData.data,

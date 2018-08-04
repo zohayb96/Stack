@@ -15,7 +15,8 @@ import SeeMoreButton from './SeeMoreButton';
 
 const PendingPostDetail = ({ posts, navigation }) => {
   console.log(posts);
-  const { text, rating, picture } = posts;
+  const { originalPost } = posts;
+  const { picture, text, rating } = originalPost;
   const {
     thumbnailStyle,
     headerContentStyle,
@@ -31,7 +32,7 @@ const PendingPostDetail = ({ posts, navigation }) => {
   return (
     <TopContainer>
       <Container>
-        {/* <View style={thumbnailContainerStyle}>
+        <View style={thumbnailContainerStyle}>
           <Image style={thumbnailStyle} source={{ uri: picture }} />
         </View>
         <View style={headerContentStyle}>
@@ -48,18 +49,18 @@ const PendingPostDetail = ({ posts, navigation }) => {
             <Text>Rated: {rating} 👎</Text>
           )}
           <Text style={headerTextStyle}>
-            Accepted by: {posts.posts.length} friends
+            Accepted by: {originalPost.posts.length} friends
           </Text>
           <SeeMoreButton
             onPress={() => {
-              navigation.navigate('SeeCreatedPostDetail', {
-                originalPost: { posts },
+              navigation.navigate('SeePendingPostDetail', {
+                originalPost: { originalPost },
               });
             }}
           >
             See More
           </SeeMoreButton>
-        </View> */}
+        </View>
       </Container>
     </TopContainer>
   );
