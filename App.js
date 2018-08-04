@@ -24,6 +24,7 @@ import CreatedPostDetail from './components/CreatedPostDetail';
 import SeeCreatedPostDetail from './components/SeeCreatedPostDetail';
 import SeeCompletedPostDetail from './components/SeeCompletedPostDetail';
 import SeePendingPostDetail from './components/SeePendingPostDetail';
+import ReviewPost from './components/ReviewPost';
 // import ARView from './components/ARView';
 
 const RootNavigator = createStackNavigator(
@@ -124,6 +125,12 @@ const RootNavigator = createStackNavigator(
       screen: CreatedPostDetail,
       navigationOptions: ({ navigation }) => ({
         title: `CreatedPostDetail`,
+      }),
+    },
+    ReviewPost: {
+      screen: ReviewPost,
+      navigationOptions: ({ navigation }) => ({
+        title: `Review`,
       }),
     },
   },

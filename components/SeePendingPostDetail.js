@@ -17,6 +17,7 @@ import Button from './Button';
 import TopContainer from './TopContainer';
 import { ImagePicker } from 'expo';
 import ChildPost from './ChildPost';
+import { withNavigation } from 'react-navigation';
 
 class SeePendingPostDetail extends Component {
   state = {};
@@ -81,34 +82,17 @@ class SeePendingPostDetail extends Component {
             );
           })}
         </ScrollView>
-        <View>
-          <Container>
-            <Container>
-              <TextInput
-                // name="postText"
-                // value={this.state.postText}
-                // onChangeText={postText => this.setState({ postText })}
-                placeholder="Add Review"
-                style={styles.textStyle}
-              />
-            </Container>
-            <Container>
-              <TextInput
-                // name="locationText"
-                // value={this.state.locationText}
-                // onChangeText={locationText => this.setState({ locationText })}
-                placeholder="Add Rating"
-                style={styles.textStyle}
-              />
-            </Container>
-            <Container>
-              <Button onPress={this.pickImage}>Add Response Image</Button>
-            </Container>
-            <Container>
-              <Button style={submitButton}>Review Post</Button>
-            </Container>
-          </Container>
-        </View>
+        <Container>
+          <Button
+            onPress={() => {
+              this.props.navigation.navigate('ReviewPost', {
+                originalPost: { postData },
+              });
+            }}
+          >
+            Review Post
+          </Button>
+        </Container>
       </TopContainer>
     );
   }
@@ -171,4 +155,4 @@ const styles = {
   },
 };
 
-export default SeePendingPostDetail;
+export default withNavigation(SeePendingPostDetail);
