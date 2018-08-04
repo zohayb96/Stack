@@ -80,6 +80,12 @@ router.get('/completed/:id', async (req, res, next) => {
             },
             {
               model: Posts,
+              include: [
+                {
+                  model: Users,
+                  as: 'issuedTo',
+                },
+              ],
             },
           ],
         },

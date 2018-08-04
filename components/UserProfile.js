@@ -16,6 +16,7 @@ import Container from './Container';
 import { createStackNavigator } from 'react-navigation';
 import CreatedPostDetail from './CreatedPostDetail';
 import CompletedPostDetail from './CompletedPostDetail';
+import PendingPostDetail from './PendingPostDetail';
 import { withNavigation } from 'react-navigation';
 
 class UserProfile extends Component {
@@ -23,6 +24,7 @@ class UserProfile extends Component {
     user: [],
     createdOriginalPosts: [],
     completedPosts: [],
+    pendingPosts: [],
   };
 
   static navigationOptions = {
@@ -41,10 +43,14 @@ class UserProfile extends Component {
     const completedPostsData = await axios.get(
       `http://172.16.26.75:1337/api/posts/completed/${user.id}`
     );
+    const pendingPostData = await axios.get(
+      `http://172.16.26.75:1337/api/posts/completed/${user.id}`
+    );
     this.setState({
       user: userData.data,
       createdOriginalPosts: createdOriginalPostsData.data,
       completedPosts: completedPostsData.data,
+      pendingPosts: pendingPostData.data,
     });
   }
 
@@ -61,6 +67,13 @@ class UserProfile extends Component {
     const { navigate } = this.props.navigation;
     return this.state.completedPosts.map(completedPost => (
       <CompletedPostDetail key={completedPost.id} posts={completedPost} />
+    ));
+  }
+
+  renderPending() {
+    const { navigate } = this.props.navigation;
+    return this.state.pendingPosts.map(pendingPost => (
+      <PendingPostDetail key={pendingPost.id} posts={pendingPost} />
     ));
   }
 
@@ -89,7 +102,7 @@ class UserProfile extends Component {
           </View>
         </Container>
         <SegmentedControlIOS
-          values={['Created', 'Completed']}
+          values={['Created', 'Completed', 'Pending']}
           selectedIndex={0}
           tintColor={'#2d3d54'}
           selectedIndex={this.state.selectedIndex}
@@ -109,10 +122,11 @@ class UserProfile extends Component {
           <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             {this.renderCompleted()}
           </ScrollView>
-        ) : // <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        //   {this.renderPending()}
-        // </ScrollView>
-        null}
+        ) : (
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            {this.renderPending()}
+          </ScrollView>
+        )}
       </View>
     );
   }

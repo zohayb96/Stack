@@ -15,8 +15,10 @@ class SeeCompletedPostDetail extends Component {
     const { navigation } = this.props;
     const post = navigation.getParam('post');
     const postData = post.posts;
-    console.log('postData: ', postData);
-    const {}
+    const { originalPost } = postData;
+    const { text, rating, picture, issuedFrom, posts } = originalPost;
+    console.log('posts: ', posts);
+    console.log('issuedFrom: ', issuedFrom);
 
     const {
       thumbnailStyle,
@@ -32,10 +34,18 @@ class SeeCompletedPostDetail extends Component {
     return (
       <TopContainer>
         <ScrollView>
-          {/* <Container>
-            <View style={thumbnailContainerStyle} />
+          <Container>
+            <View style={thumbnailContainerStyle}>
+              <Image
+                style={thumbnailStyle}
+                source={{ uri: issuedFrom.picture }}
+              />
+            </View>
             <View style={headerContentStyle}>
               <Text style={headerTextStyle}>{text}</Text>
+              <Text>
+                Created by: {issuedFrom.firstName + ' ' + issuedFrom.lastName}
+              </Text>
               {rating > 90 ? (
                 <Text>Rated: {rating} 🔥🔥🔥</Text>
               ) : rating > 80 ? (
@@ -56,7 +66,7 @@ class SeeCompletedPostDetail extends Component {
             return (
               <ChildPost key={post.id} childrenPosts={post} id={post.id} />
             );
-          })} */}
+          })}
         </ScrollView>
       </TopContainer>
     );
