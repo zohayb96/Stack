@@ -21,15 +21,11 @@ import {
   Image,
   Text,
 } from 'react-native';
-import RenderHappy from './RenderHappy';
-import RenderLove from './RenderLove';
-import RenderAngry from './RenderAngry';
-import RenderSurprised from './RenderSurprised';
 const { _getLocationAsync } = require('../utils');
 
 console.disableYellowBox = true;
 
-class Render extends Component {
+export default class RenderAngry extends Component {
   constructor() {
     super();
     this.state = {};
@@ -91,7 +87,7 @@ class Render extends Component {
     rightLight.position.set(3, 5, 0).normalize();
     bottomLight.position.set(0, -5, 0).normalize();
     // Ambient Lighting
-    var ambient = new THREE.AmbientLight(0x00ffff);
+    var ambient = new THREE.AmbientLight(0x555555);
     scene.add(ambient);
 
     // Add Lighting to Scene
@@ -111,14 +107,7 @@ class Render extends Component {
         asset: Expo.Asset.fromModule(require('./../public/Glass.jpg')),
       }),
       transparent: true,
-      opacity: 0.5,
-    });
-
-    const customMaterial = new THREE.MeshBasicMaterial({
-      map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('./../public/custom.jpg')),
-      }),
-      transparent: true,
+      opacity: 0.3,
     });
 
     // LOVE MATERIAL
@@ -130,9 +119,9 @@ class Render extends Component {
     });
 
     // Happy MATERIAL
-    const happyMaterial = new THREE.MeshBasicMaterial({
+    const angryMaterial = new THREE.MeshBasicMaterial({
       map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../public/happy.jpg')),
+        asset: Expo.Asset.fromModule(require('../public/angry.jpg')),
       }),
       transparent: true,
     });
@@ -160,11 +149,11 @@ class Render extends Component {
     // TextureLoader
     var loader = new THREE.TextureLoader();
     var myTexture = loader.load(myUrl);
-    // var customMaterial = new THREE.MeshBasicMaterial({ map: myTexture });
+    var customMaterial = new THREE.MeshBasicMaterial({ map: myTexture });
 
     // Defined Object
     //
-    const cube = new THREE.Mesh(cubeGeometry, customMaterial);
+    const cube = new THREE.Mesh(cubeGeometry, angryMaterial);
     cube.name = 'cube';
     var sphere = new THREE.Mesh(SphereGeometry, glassMaterial);
 
@@ -190,33 +179,3 @@ class Render extends Component {
 const { height, width } = Dimensions.get('window');
 
 const styles = {};
-
-export default createBottomTabNavigator(
-  {
-    Happy: { screen: RenderHappy },
-    Love: { screen: RenderLove },
-    Custom: { screen: Render },
-    Surprise: { screen: RenderSurprised },
-    Angry: { screen: RenderAngry },
-  },
-  {
-    navigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, tintColor }) => {
-        const { routeName } = navigation.state;
-        let iconName;
-        if (routeName === 'Render') {
-          iconName = `ios-contact${focused ? '' : '-outline'}`;
-          // } else if (routeName === 'Friends') {
-          //   iconName = `ios-contacts${focused ? '' : '-outline'}`;
-          // } else if (routeName === 'Add') {
-          //   iconName = `ios-add-circle${focused ? '' : '-outline'}`;
-          // } else if (routeName === 'Map') {
-          //   iconName = `ios-map${focused ? '' : '-outline'}`;
-          // } else if (routeName === 'Settings') {
-          //   iconName = `ios-settings${focused ? '' : '-outline'}`;
-        }
-        return <Ionicons name={iconName} size={25} color={tintColor} />;
-      },
-    }),
-  }
-);

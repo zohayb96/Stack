@@ -29,7 +29,7 @@ export default class MapToView extends React.Component {
       error => this.setState({ error: error.message }),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
-    const response = await axios.get(`http://172.16.21.129:1337/api/oPosts`);
+    const response = await axios.get(`http://localhost:1337/api/oPosts`);
     this.setState({
       allPosts: response.data,
     });

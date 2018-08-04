@@ -33,13 +33,13 @@ class UserProfile extends Component {
     const { navigation } = this.props;
     const user = navigation.getParam('user');
     const userData = await axios.get(
-      `http://172.16.21.129:1337/api/users/${user.id}`
+      `http://localhost:1337/api/users/${user.id}`
     );
     const createdOriginalPostsData = await axios.get(
-      `http://172.16.21.129:1337/api/Oposts/${user.id}`
+      `http://localhost:1337/api/Oposts/${user.id}`
     );
     const completedPostsData = await axios.get(
-      `http://172.16.21.129:1337/api/posts/completed/${user.id}`
+      `http://localhost:1337/api/posts/completed/${user.id}`
     );
     this.setState({
       user: userData.data,

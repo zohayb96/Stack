@@ -28,7 +28,7 @@ class AllUsers extends Component {
     const userId = navigation.getParam('user');
     console.log('user: ', userId);
     const response = await axios.get(
-      `http://172.16.21.129:1337/api/users/friends/${userId.id}`
+      `http://localhost:1337/api/users/friends/${userId.id}`
     );
     this.setState({
       allFriends: response.data,
