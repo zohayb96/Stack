@@ -31,7 +31,7 @@ class MapToView extends React.Component {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
     const response = await axios.get(
-      `http://10.2.2.38:1337/api/oPosts/forUsers`
+      `http://172.16.26.75:1337/api/oPosts/forUsers`
     );
     this.setState({
       allPosts: response.data,
