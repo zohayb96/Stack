@@ -39,7 +39,9 @@ class MapToView extends React.Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigation } = this.props;
+    const user = navigation.getParam('user');
+
     return (
       <View style={styles.container}>
         <MapView
@@ -97,6 +99,7 @@ class MapToView extends React.Component {
                 onPress={() => {
                   this.props.navigation.navigate('SinglePost', {
                     post: { marker },
+                    currentUser: { user },
                   });
                 }}
               >

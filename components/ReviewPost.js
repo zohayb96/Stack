@@ -65,6 +65,10 @@ class ReviewPost extends Component {
   };
 
   render() {
+    const { navigation } = this.props;
+    const currentUser = navigation.getParam('currentUser');
+    console.log('REVIEW POST CU: ', currentUser);
+
     const {
       thumbnailStyle,
       headerContentStyle,
@@ -78,7 +82,6 @@ class ReviewPost extends Component {
     } = styles;
 
     console.log(this.state);
-    const { navigation } = this.props;
     let { postPicture } = this.state;
     const originalPost = navigation.getParam('originalPost');
     const originalPostData = originalPost.postData;

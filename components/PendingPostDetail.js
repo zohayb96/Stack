@@ -13,8 +13,9 @@ import Container from './Container';
 import Button from './Button';
 import SeeMoreButton from './SeeMoreButton';
 
-const PendingPostDetail = ({ posts, navigation }) => {
+const PendingPostDetail = ({ posts, navigation, user }) => {
   console.log(posts);
+  const currentUser = user;
   const { originalPost } = posts;
   const { picture, text, rating } = originalPost;
   const {
@@ -55,6 +56,7 @@ const PendingPostDetail = ({ posts, navigation }) => {
             onPress={() => {
               navigation.navigate('SeePendingPostDetail', {
                 originalPost: { originalPost },
+                currentUser: { currentUser },
               });
             }}
           >

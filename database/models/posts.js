@@ -13,6 +13,7 @@ module.exports = db.define('posts', {
   },
   responsePicture: {
     type: TEXT,
+    allowNull: false,
   },
   responseText: {
     type: STRING,

@@ -25,14 +25,9 @@ class SeePendingPostDetail extends Component {
   render() {
     const { navigation } = this.props;
     const originalPost = navigation.getParam('originalPost');
+    const currentUser = navigation.getParam('currentUser');
     const postData = originalPost.originalPost;
     const { text, rating, picture, posts, issuedFrom } = postData;
-    console.log('issuedFrom: ', issuedFrom);
-    console.log('posts: ', posts);
-    console.log('picture: ', picture);
-    console.log('rating,: ', rating);
-    console.log('text: ', text);
-
     const {
       thumbnailStyle,
       headerContentStyle,
@@ -87,6 +82,7 @@ class SeePendingPostDetail extends Component {
             onPress={() => {
               this.props.navigation.navigate('ReviewPost', {
                 originalPost: { postData },
+                currentUser: { currentUser },
               });
             }}
           >

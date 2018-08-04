@@ -20,13 +20,16 @@ import PendingPostDetail from './PendingPostDetail';
 import { withNavigation } from 'react-navigation';
 
 class UserProfile extends Component {
-  state = {
-    user: [],
-    createdOriginalPosts: [],
-    completedPosts: [],
-    pendingPosts: [],
-    selectedIndex: 0,
-  };
+  constructor() {
+    super();
+    this.state = {
+      user: [],
+      createdOriginalPosts: [],
+      completedPosts: [],
+      pendingPosts: [],
+      selectedIndex: 0,
+    };
+  }
 
   static navigationOptions = {
     title: 'Profile',
@@ -74,7 +77,11 @@ class UserProfile extends Component {
   renderPending() {
     const { navigate } = this.props.navigation;
     return this.state.pendingPosts.map(pendingPost => (
-      <PendingPostDetail key={pendingPost.id} posts={pendingPost} />
+      <PendingPostDetail
+        key={pendingPost.id}
+        posts={pendingPost}
+        user={this.state.user}
+      />
     ));
   }
 

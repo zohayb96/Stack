@@ -26,7 +26,6 @@ class AllUsers extends Component {
   async componentWillMount() {
     const { navigation } = this.props;
     const userId = navigation.getParam('user');
-    console.log('user: ', userId);
     const response = await axios.get(
       `http://172.16.26.75:1337/api/users/friends/${userId.id}`
     );

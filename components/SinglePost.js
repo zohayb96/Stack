@@ -13,6 +13,8 @@ class SinglePost extends Component {
 
   render() {
     const { navigation } = this.props;
+    const currentUser = navigation.getParam('currentUser');
+    console.log(' Single Post Current User: ', currentUser);
     const prop = navigation.getParam('post');
     const postData = prop.marker;
     const { text, rating, picture, issuedFrom, posts } = postData;
