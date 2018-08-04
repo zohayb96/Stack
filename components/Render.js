@@ -5,7 +5,13 @@ import Button from './Button';
 import Container from './Container';
 import DropdownMenu from 'react-native-dropdown-menu';
 import Expo, { Asset } from 'expo';
+import {
+  createBottomTabNavigator,
+  TabBarBottom,
+  StackNavigator,
+} from 'react-navigation';
 require('../utils/OBJLoader');
+import { Ionicons } from '@expo/vector-icons';
 import {
   View,
   NativeModules,
@@ -19,7 +25,7 @@ const { _getLocationAsync } = require('../utils');
 
 console.disableYellowBox = true;
 
-export default class Render extends Component {
+class Render extends Component {
   constructor() {
     super();
     this.state = {};
@@ -49,22 +55,6 @@ export default class Render extends Component {
         </Container>
         <Container>
           <Text>Location: {locationText}</Text>
-        </Container>
-        <Container>
-          <Container>
-            <Image
-              source={{ uri: imageToUse }}
-              style={{
-                height: 50,
-                width: 50,
-              }}
-            />
-          </Container>
-          <Button onPress={this.changeEmoji}>Happy</Button>
-          <Button onPress={this.changeEmoji}>Love</Button>
-          <Button onPress={this.changeEmoji}>Custom</Button>
-          <Button onPress={this.changeEmoji}>Surprise</Button>
-          <Button onPress={this.changeEmoji}>Angry</Button>
         </Container>
       </View>
     );
@@ -189,3 +179,33 @@ export default class Render extends Component {
 const { height, width } = Dimensions.get('window');
 
 const styles = {};
+
+export default createBottomTabNavigator(
+  {
+    Happy: { screen: Render },
+    Love: { screen: Render },
+    Custom: { screen: Render },
+    Surprise: { screen: Render },
+    Angry: { screen: Render },
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === 'Render') {
+          iconName = `ios-contact${focused ? '' : '-outline'}`;
+          // } else if (routeName === 'Friends') {
+          //   iconName = `ios-contacts${focused ? '' : '-outline'}`;
+          // } else if (routeName === 'Add') {
+          //   iconName = `ios-add-circle${focused ? '' : '-outline'}`;
+          // } else if (routeName === 'Map') {
+          //   iconName = `ios-map${focused ? '' : '-outline'}`;
+          // } else if (routeName === 'Settings') {
+          //   iconName = `ios-settings${focused ? '' : '-outline'}`;
+        }
+        return <Ionicons name={iconName} size={25} color={tintColor} />;
+      },
+    }),
+  }
+);

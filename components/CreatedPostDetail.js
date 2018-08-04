@@ -31,8 +31,21 @@ const CreatedPostDetail = ({ posts }) => {
           <Image style={thumbnailStyle} source={{ uri: picture }} />
         </View>
         <View style={headerContentStyle}>
-          <Text style={headerTextStyle}>{text}</Text>
-          <Text style={headerTextStyle}>{rating}</Text>
+          <Text style={headerTextStyle}>Post: {text}</Text>
+          {rating > 90 ? (
+            <Text>Rated: {rating} 🔥🔥🔥</Text>
+          ) : rating > 80 ? (
+            <Text>Rated: {rating} 🔥🔥</Text>
+          ) : rating > 70 ? (
+            <Text>Rated: {rating} 🔥</Text>
+          ) : rating > 50 ? (
+            <Text>Rated: {rating} 👍</Text>
+          ) : (
+            <Text>Rated: {rating} 👎</Text>
+          )}
+          <Text style={headerTextStyle}>
+            Accepted by: {posts.posts.length} friends
+          </Text>
         </View>
       </Container>
     </TopContainer>

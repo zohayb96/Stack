@@ -35,14 +35,36 @@ router.get('/sub/:id', async (req, res, next) => {
 });
 
 // Get own create original posts
+// router.get('/:id', async (req, res, next) => {
+//   const issuerId = req.params.id;
+//   try {
+//     const ownPosts = await OriginalPost.findAll({
+//       include: [{ model: Users, as: 'issuedFrom' }, { model: Posts }],
+//       where: {
+//         issuedFromId: issuerId,
+//       },
+//     });
+//     res.json(ownPosts);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+// Get own created original posts which have been accepted/ declined
 router.get('/:id', async (req, res, next) => {
   const issuerId = req.params.id;
   try {
-    const ownPosts = await OriginalPost.all({
-      include: [{ model: Users, as: 'issuedFrom' }, { model: Posts }],
+    const ownPosts = await OriginalPost.findAll({
       where: {
         issuedFromId: issuerId,
       },
+      include: [
+        {
+          model: Posts,
+          where: { accepted: true },
+          required: false,
+        },
+      ],
     });
     res.json(ownPosts);
   } catch (err) {

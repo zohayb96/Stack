@@ -42,7 +42,7 @@ export default class MapToView extends React.Component {
         <MapView
           ref={MapView => (this.MapView = MapView)}
           style={styles.map}
-          // provider="google"
+          provider="google"
           loadingEnabled={true}
           loadingIndicatorColor="#666666"
           loadingBackgroundColor="#eeeeee"

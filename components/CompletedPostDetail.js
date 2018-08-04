@@ -38,7 +38,7 @@ const CompletedPostDetail = ({ posts }) => {
           <Text style={headerTextStyle}>
             Sent by:{' '}
             {posts.originalPost.issuedFrom.firstName +
-              '' +
+              ' ' +
               posts.originalPost.issuedFrom.lastName}
           </Text>
           <Container>
@@ -48,7 +48,17 @@ const CompletedPostDetail = ({ posts }) => {
             />
           </Container>
           <Text style={headerTextStyle}>Your Response: {responseText}</Text>
-          <Text style={headerTextStyle}>Your Rating: {responseRating}</Text>
+          {responseRating > 90 ? (
+            <Text>Rated: {responseRating} 🔥🔥🔥</Text>
+          ) : responseRating > 80 ? (
+            <Text>Rated: {responseRating} 🔥🔥</Text>
+          ) : responseRating > 70 ? (
+            <Text>Rated: {responseRating} 🔥</Text>
+          ) : responseRating > 50 ? (
+            <Text>Rated: {responseRating} 👍</Text>
+          ) : (
+            <Text>Rated: {responseRating} 👎</Text>
+          )}
         </View>
       </Container>
     </TopContainer>
@@ -62,8 +72,8 @@ const styles = {
     borderRadius: 25,
   },
   responsePictureStyle: {
-    height: 100,
-    width: 100,
+    height: 250,
+    width: 250,
   },
   responseContainerStyle: {
     justifyContent: 'center',

@@ -85,14 +85,6 @@ class UserProfile extends Component {
                 {firstName + ' ' + lastName}
               </Text>
             </Container>
-            <View>
-              <TouchableOpacity
-                style={styles.buttonStyle}
-                onPress={() => this.props.navigation.navigate(`EditUser`)}
-              >
-                <Text style={styles.buttonTextStyle}>Edit</Text>
-              </TouchableOpacity>
-            </View>
           </View>
         </Container>
         <SegmentedControlIOS
