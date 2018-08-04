@@ -78,6 +78,9 @@ router.get('/completed/:id', async (req, res, next) => {
               model: Users,
               as: 'issuedFrom',
             },
+            {
+              model: Posts,
+            },
           ],
         },
       ],

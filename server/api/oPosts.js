@@ -111,6 +111,12 @@ router.get('/:id', async (req, res, next) => {
       include: [
         {
           model: Posts,
+          include: [
+            {
+              model: Users,
+              as: 'issuedTo',
+            },
+          ],
           where: { accepted: true },
           required: false,
         },

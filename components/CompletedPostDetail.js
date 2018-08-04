@@ -7,10 +7,12 @@ import {
   ScrollView,
   SegmentedControlIOS,
 } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import TopContainer from './TopContainer';
 import Container from './Container';
+import SeeMoreButton from './SeeMoreButton';
 
-const CompletedPostDetail = ({ posts }) => {
+const CompletedPostDetail = ({ posts, navigation }) => {
   const { responseRating, responseText, responsePicture } = posts;
   console.log('props: ', posts);
 
@@ -59,6 +61,15 @@ const CompletedPostDetail = ({ posts }) => {
           ) : (
             <Text>Rated: {responseRating} 👎</Text>
           )}
+          <SeeMoreButton
+            onPress={() => {
+              navigation.navigate('SeeCompletedPostDetail', {
+                post: { posts },
+              });
+            }}
+          >
+            See More
+          </SeeMoreButton>
         </View>
       </Container>
     </TopContainer>
@@ -97,4 +108,4 @@ const styles = {
   },
 };
 
-export default CompletedPostDetail;
+export default withNavigation(CompletedPostDetail);

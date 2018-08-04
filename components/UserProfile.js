@@ -58,6 +58,7 @@ class UserProfile extends Component {
   }
 
   renderCompleted() {
+    const { navigate } = this.props.navigation;
     return this.state.completedPosts.map(completedPost => (
       <CompletedPostDetail key={completedPost.id} posts={completedPost} />
     ));

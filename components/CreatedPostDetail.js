@@ -7,10 +7,13 @@ import {
   ScrollView,
   SegmentedControlIOS,
 } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import TopContainer from './TopContainer';
 import Container from './Container';
+import Button from './Button';
+import SeeMoreButton from './SeeMoreButton';
 
-const CreatedPostDetail = ({ posts }) => {
+const CreatedPostDetail = ({ posts, navigation }) => {
   const { text, rating, picture } = posts;
   const {
     thumbnailStyle,
@@ -46,6 +49,15 @@ const CreatedPostDetail = ({ posts }) => {
           <Text style={headerTextStyle}>
             Accepted by: {posts.posts.length} friends
           </Text>
+          <SeeMoreButton
+            onPress={() => {
+              navigation.navigate('SeeCreatedPostDetail', {
+                originalPost: { posts },
+              });
+            }}
+          >
+            See More
+          </SeeMoreButton>
         </View>
       </Container>
     </TopContainer>
@@ -76,4 +88,4 @@ const styles = {
   },
 };
 
-export default CreatedPostDetail;
+export default withNavigation(CreatedPostDetail);

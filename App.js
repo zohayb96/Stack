@@ -20,6 +20,9 @@ import AddToMap from './components/AddToMap';
 import MapToView from './components/MapView';
 import Render from './components/Render';
 import SinglePost from './components/SinglePost';
+import CreatedPostDetail from './components/CreatedPostDetail';
+import SeeCreatedPostDetail from './components/SeeCreatedPostDetail';
+import SeeCompletedPostDetail from './components/SeeCompletedPostDetail';
 // import ARView from './components/ARView';
 
 const RootNavigator = createStackNavigator(
@@ -96,6 +99,24 @@ const RootNavigator = createStackNavigator(
       screen: SinglePost,
       navigationOptions: ({ navigation }) => ({
         title: `SinglePost`,
+      }),
+    },
+    SeeCreatedPostDetail: {
+      screen: SeeCreatedPostDetail,
+      navigationOptions: ({ navigation }) => ({
+        title: `See More`,
+      }),
+    },
+    SeeCompletedPostDetail: {
+      screen: SeeCompletedPostDetail,
+      navigationOptions: ({ navigation }) => ({
+        title: `See More`,
+      }),
+    },
+    CreatedPostDetail: {
+      screen: CreatedPostDetail,
+      navigationOptions: ({ navigation }) => ({
+        title: `CreatedPostDetail`,
       }),
     },
   },

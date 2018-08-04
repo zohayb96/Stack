@@ -62,7 +62,7 @@ class InputForm extends Component {
     Alert.alert(
       'Posted!',
       'Awesome!',
-      [{ text: ':)', onPress: () => console.log('Challenge Posted') }],
+      [{ text: ':)', onPress: () => console.log('Posted') }],
       { cancelable: false }
     );
   };
@@ -75,7 +75,7 @@ class InputForm extends Component {
       [
         {
           text: 'Please Try Again',
-          onPress: () => console.log('Challenge Error'),
+          onPress: () => console.log('Error'),
         },
       ],
       { cancelable: false }
