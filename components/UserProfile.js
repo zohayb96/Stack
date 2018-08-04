@@ -15,8 +15,8 @@ import TopContainer from './TopContainer';
 import Container from './Container';
 import { createStackNavigator } from 'react-navigation';
 import CreatedPostDetail from './CreatedPostDetail';
+import CompletedPostDetail from './CompletedPostDetail';
 import { withNavigation } from 'react-navigation';
-import { create } from 'gl-matrix/src/gl-matrix/mat3';
 
 class UserProfile extends Component {
   state = {
@@ -50,7 +50,7 @@ class UserProfile extends Component {
 
   renderCreated() {
     if (this.state.createdOriginalPosts !== null) {
-      return [this.state.createdOriginalPosts].map(createdPost => (
+      return this.state.createdOriginalPosts.map(createdPost => (
         <CreatedPostDetail key={createdPost.id} posts={createdPost} />
       ));
     }
@@ -58,12 +58,8 @@ class UserProfile extends Component {
   }
 
   renderCompleted() {
-    return this.state.completedPosts.map(challenge => (
-      <CreatedPostDetail
-        key={challenge.id}
-        user={this.state.users}
-        challenges={challenge}
-      />
+    return this.state.completedPosts.map(completedPost => (
+      <CompletedPostDetail key={completedPost.id} posts={completedPost} />
     ));
   }
 

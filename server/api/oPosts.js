@@ -8,7 +8,7 @@ const router = require('express').Router();
 router.get('/', async (req, res, next) => {
   try {
     const allOriginalPosts = await OriginalPost.findAll({
-      include: [{ model: Users, as: 'issuedFrom' }],
+      include: [{ model: Posts }],
     });
     res.json(allOriginalPosts);
   } catch (err) {
@@ -38,8 +38,8 @@ router.get('/sub/:id', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   const issuerId = req.params.id;
   try {
-    const ownPosts = await OriginalPost.findOne({
-      include: [{ model: Users, as: 'issuedFrom' }],
+    const ownPosts = await OriginalPost.all({
+      include: [{ model: Users, as: 'issuedFrom' }, { model: Posts }],
       where: {
         issuedFromId: issuerId,
       },

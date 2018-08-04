@@ -70,7 +70,16 @@ router.get('/completed/:id', async (req, res, next) => {
     const allPosts = await Posts.findAll({
       include: [
         { model: Users, as: 'issuedTo' },
-        { model: OriginalPost, as: 'originalPost' },
+        {
+          model: OriginalPost,
+          as: 'originalPost',
+          include: [
+            {
+              model: Users,
+              as: 'issuedFrom',
+            },
+          ],
+        },
       ],
       where: {
         issuedToId: issuerToId,
