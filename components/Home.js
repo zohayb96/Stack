@@ -11,6 +11,10 @@ import { StackNavigator } from 'react-navigation';
 
 const Home = ({ navigation }) => (
   <View style={styles.container}>
+    <Image
+      style={styles.thumbnailStyle}
+      source={require('../public/inizio.png')}
+    />
     <TouchableOpacity
       style={styles.loginButtonStyle}
       onPress={() => navigation.navigate(`LoginForm`)}
@@ -36,14 +40,14 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: 'black',
-    fontSize: 24,
+    fontSize: 20,
     justifyContent: 'flex-start',
   },
   rightsText: {
     color: 'white',
     fontSize: 10,
     justifyContent: 'center',
-    marginTop: 10,
+    marginTop: 15,
   },
   loginButtonStyle: {
     backgroundColor: 'white',
@@ -51,8 +55,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginLeft: 5,
     marginRight: 5,
-    width: 200,
-    height: 50,
+    width: 175,
+    height: 40,
     alignItems: `center`,
     justifyContent: `center`,
   },
@@ -67,8 +71,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginLeft: 5,
     marginRight: 5,
-    width: 200,
-    height: 50,
+    marginTop: 5,
+    width: 175,
+    height: 40,
     alignItems: `center`,
     justifyContent: `center`,
   },

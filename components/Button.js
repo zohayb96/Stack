@@ -26,7 +26,7 @@ const styles = {
     width: null,
     alignSelf: 'stretch',
     borderRadius: 5,
-    backgroundColor: '#32324e',
+    backgroundColor: '#03396c',
   },
 };
 

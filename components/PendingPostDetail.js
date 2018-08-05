@@ -14,10 +14,9 @@ import Button from './Button';
 import SeeMoreButton from './SeeMoreButton';
 
 const PendingPostDetail = ({ posts, navigation, user }) => {
-  console.log(posts);
   const currentUser = user;
   const { originalPost } = posts;
-  const { picture, text, rating } = originalPost;
+  const { picture, text, rating, issuedFrom } = originalPost;
   const {
     thumbnailStyle,
     headerContentStyle,
@@ -38,6 +37,9 @@ const PendingPostDetail = ({ posts, navigation, user }) => {
         </View>
         <View style={headerContentStyle}>
           <Text style={headerTextStyle}>Post: {text}</Text>
+          <Text>
+            Created by: {issuedFrom.firstName + ' ' + issuedFrom.lastName}
+          </Text>
           {rating > 90 ? (
             <Text>Rated: {rating} 🔥🔥🔥</Text>
           ) : rating > 80 ? (
@@ -49,9 +51,6 @@ const PendingPostDetail = ({ posts, navigation, user }) => {
           ) : (
             <Text>Rated: {rating} 👎</Text>
           )}
-          <Text style={headerTextStyle}>
-            Accepted by: {originalPost.posts.length} friends
-          </Text>
           <SeeMoreButton
             onPress={() => {
               navigation.navigate('SeePendingPostDetail', {

@@ -39,16 +39,16 @@ class UserProfile extends Component {
     const { navigation } = this.props;
     const user = navigation.getParam('user');
     const userData = await axios.get(
-      `http://172.16.26.75:1337/api/users/${user.id}`
+      `http://localhost:1337/api/users/${user.id}`
     );
     const createdOriginalPostsData = await axios.get(
-      `http://172.16.26.75:1337/api/Oposts/${user.id}`
+      `http://localhost:1337/api/Oposts/${user.id}`
     );
     const completedPostsData = await axios.get(
-      `http://172.16.26.75:1337/api/posts/completed/${user.id}`
+      `http://localhost:1337/api/posts/completed/${user.id}`
     );
     const pendingPostData = await axios.get(
-      `http://172.16.26.75:1337/api/posts/pending/${user.id}`
+      `http://localhost:1337/api/posts/pending/${user.id}`
     );
     this.setState({
       user: userData.data,
@@ -113,7 +113,7 @@ class UserProfile extends Component {
         <SegmentedControlIOS
           values={['Created', 'Completed', 'Pending']}
           selectedIndex={0}
-          tintColor={'#2d3d54'}
+          tintColor={'#03396c'}
           selectedIndex={this.state.selectedIndex}
           onChange={event => {
             this.setState({

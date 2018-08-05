@@ -15,13 +15,12 @@ const styles = {
   textStyle: {
     alignSelf: 'center',
     color: '#FFFFFF',
-    fontSize: 10,
-    fontWeight: '600',
+    fontSize: 14,
     paddingTop: 5,
     paddingBottom: 5,
   },
   buttonStyle: {
-    height: 20,
+    height: 25,
     flex: 1,
     width: null,
     alignSelf: 'stretch',
