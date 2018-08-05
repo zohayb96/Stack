@@ -104,6 +104,24 @@ originalPosts = [
     issuedFromId: 3,
     location: [40.689247, -74.044502],
   },
+  {
+    id: 4,
+    text: 'Check out M&M World',
+    rating: 100,
+    picture:
+      'https://1.bp.blogspot.com/-82uaI3rfFvE/VN41RcOfVsI/AAAAAAAAFIA/4FPv0ibAspA/s1600/mm-world-nova-york.jpg',
+    issuedFromId: 1,
+    location: [40.7602, 73.9844],
+  },
+  {
+    id: 5,
+    text: 'Ice skating at Rockefeller Center',
+    rating: 84,
+    picture:
+      'https://d1v5vpeyrmf36z.cloudfront.net/media/CACHE/images/uploads/zinnia/Rink_Friends_2/f24617ae83a8564c90aaacb57327bdc7.jpg',
+    issuedFromId: 1,
+    location: [440.7587, 73.9787],
+  },
 ];
 
 newPosts = [
@@ -131,7 +149,7 @@ newPosts = [
     responseRating: 95,
     responseText: 'Haha cool, liked the trip up there!',
     responsePicture:
-      'https://128bfe101e468ad0417c-d8631487b453c9c2c5c26c67f934f4a1.ssl.cf1.rackcdn.com/artworks/artwork_5887e5c129421.jpg',
+      'http://static.reservedirect.com/media/product/gallery/539/Early_Access_Statue_of_Liberty_Tour_with_Ellis_Island_(22436).jpg',
   },
   {
     accepted: true,
@@ -150,6 +168,14 @@ newPosts = [
     responseText: 'felt like throwin thef up lol!',
     responsePicture:
       'http://gadv.com/park/assets/images/14-04-19-Zumanjaro-2.jpg',
+  },
+  {
+    accepted: true,
+    originalPostId: 4,
+    issuedToId: 6,
+    responseRating: 95,
+    responseText: 'Amazing! I LOVE M&Ms!!',
+    responsePicture: 'http://photos.wikimapia.org/p/00/03/03/15/88_full.jpg',
   },
   // Pending
   {

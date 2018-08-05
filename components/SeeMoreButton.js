@@ -22,10 +22,10 @@ const styles = {
   buttonStyle: {
     height: 25,
     flex: 1,
-    width: null,
+    width: 100,
     alignSelf: 'stretch',
     borderRadius: 5,
-    backgroundColor: 'green',
+    backgroundColor: '#00653B',
   },
 };
 
