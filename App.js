@@ -51,7 +51,8 @@ const RootNavigator = createStackNavigator(
     AllUsers: {
       screen: AllUsers,
       navigationOptions: ({ navigation }) => ({
-        title: `Welcome`,
+        title: `INIZIO`,
+        headerLeft: null,
       }),
     },
     LoginForm: {

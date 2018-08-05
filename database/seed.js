@@ -85,7 +85,7 @@ originalPosts = [
     picture:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf2qwUV3gL71did5ydYf4hIifEx0_2g0ZvqlIFY8ptQXyP9SiaTA',
     issuedFromId: 7,
-    location: [40.8151, 72.8664],
+    location: [40.81511250000001, -72.8664172],
   },
   {
     id: 2,
@@ -111,7 +111,7 @@ originalPosts = [
     picture:
       'https://1.bp.blogspot.com/-82uaI3rfFvE/VN41RcOfVsI/AAAAAAAAFIA/4FPv0ibAspA/s1600/mm-world-nova-york.jpg',
     issuedFromId: 1,
-    location: [40.7602, 73.9844],
+    location: [40.758896, -73.98513],
   },
   {
     id: 5,
@@ -120,7 +120,7 @@ originalPosts = [
     picture:
       'https://d1v5vpeyrmf36z.cloudfront.net/media/CACHE/images/uploads/zinnia/Rink_Friends_2/f24617ae83a8564c90aaacb57327bdc7.jpg',
     issuedFromId: 1,
-    location: [40.7587, 73.9787],
+    location: [40.758834, -73.97834160000002],
   },
   {
     id: 6,
@@ -128,7 +128,7 @@ originalPosts = [
     rating: 90,
     picture: 'http://www.krugerpark.co.za/images/1-lion-charge-gc590a.jpg',
     issuedFromId: 4,
-    location: [40.8506, 73.877],
+    location: [40.8505949, -73.8769982],
   },
 ];
 
