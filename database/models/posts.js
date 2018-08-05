@@ -13,7 +13,8 @@ module.exports = db.define('posts', {
   },
   responsePicture: {
     type: TEXT,
-    allowNull: false,
+    defaultValue:
+      'https://uploads-ssl.webflow.com/57e5747bd0ac813956df4e96/5aebae14c6d254621d81f826_placeholder.png',
   },
   responseText: {
     type: STRING,

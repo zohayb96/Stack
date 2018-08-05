@@ -76,6 +76,7 @@ class UserProfile extends Component {
 
   renderPending() {
     const { navigate } = this.props.navigation;
+    console.log('PENDING: ', this.state.pendingPosts);
     return this.state.pendingPosts.map(pendingPost => (
       <PendingPostDetail
         key={pendingPost.id}

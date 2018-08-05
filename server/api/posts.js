@@ -5,6 +5,20 @@ const Op = Sequelize.Op;
 const { Users, Posts, OriginalPost } = require('../../database/');
 const router = require('express').Router();
 
+router.post('/create', async (req, res, next) => {
+  try {
+    const createdPost = await Posts.create(req.body);
+    if (createdPost) {
+      res.status(201).json(createdPost);
+    } else {
+      res.sendStatus(500);
+    }
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+});
+
 router.get('/', async (req, res, next) => {
   try {
     const responsePosts = await Posts.findAll({

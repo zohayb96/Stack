@@ -9,12 +9,58 @@ import TopContainer from './TopContainer';
 import ChildPost from './ChildPost';
 
 class SinglePost extends Component {
-  state = {};
+  constructor() {
+    super();
+    state = {
+      // originalPostId: 0,
+      // issuedToId: 0,
+      // accepted: true,
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  // async componentWillMount() {
+  //   const { navigation } = this.props;
+  //   const currentUser = navigation.getParam('currentUser');
+  //   const prop = navigation.getParam('post');
+  //   const postData = prop.marker;
+  //   console.log('ORIGINAL POST DATA', postData.id);
+  //   console.log('CURRENT USER', currentUser.user.id);
+  //   this.setState({
+  //     originalPostId: postData.id,
+  //     issuedToId: currentUser.user.id,
+  //     accepted: true,
+  //   });
+  //   console.log(this.state);
+  // }
+
+  async handleSubmit(submitEvent) {
+    const { navigation } = this.props;
+    const currentUser = navigation.getParam('currentUser');
+    const prop = navigation.getParam('post');
+    const postData = prop.marker;
+    const postId = postData.id;
+    const userId = currentUser.user.id;
+    const dataToSend = {
+      originalPostId: postId,
+      issuedToId: userId,
+      accepted: true,
+    };
+    console.log(dataToSend);
+    try {
+      await axios.post(`http://172.16.26.75:1337/api/posts/create`, {
+        originalPostId: postId,
+        issuedToId: userId,
+        accepted: true,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   render() {
     const { navigation } = this.props;
     const currentUser = navigation.getParam('currentUser');
-    console.log(' Single Post Current User: ', currentUser);
     const prop = navigation.getParam('post');
     const postData = prop.marker;
     const { text, rating, picture, issuedFrom, posts } = postData;
@@ -62,7 +108,7 @@ class SinglePost extends Component {
             <Image style={imageStyle} source={{ uri: picture }} />
           </Container>
           <Container>
-            <Button>Accept</Button>
+            <Button onPress={this.handleSubmit}>Accept</Button>
           </Container>
           {posts.map(post => {
             return (
