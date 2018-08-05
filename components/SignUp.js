@@ -132,6 +132,7 @@ const styles = {
     flex: 1,
     alignItems: `center`,
     justifyContent: `center`,
+    // backgroundColor: '#03396c',
   },
   textStyle: {
     height: 30,

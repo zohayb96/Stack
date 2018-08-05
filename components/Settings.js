@@ -39,7 +39,7 @@ class Settings extends Component {
     try {
       const { navigation } = this.props;
       const user = navigation.getParam('user');
-      await axios.put(`http://localhost:1337/api/users/${user.id}`, {
+      await axios.put(`http://192.168.1.11:1337/api/users/${user.id}`, {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         username: this.state.username,
@@ -49,7 +49,7 @@ class Settings extends Component {
       });
       // get user info
       const response = await axios.get(
-        `http://localhost:1337/api/users/${user.id}`
+        `http://192.168.1.11:1337/api/users/${user.id}`
       );
       this.setState({ user: response.data });
     } catch (error) {
@@ -61,7 +61,7 @@ class Settings extends Component {
     const { navigation } = this.props;
     const user = navigation.getParam('user');
     const response = await axios.get(
-      `http://localhost:1337/api/users/${user.id}`
+      `http://192.168.1.11:1337/api/users/${user.id}`
     );
 
     this.setState({

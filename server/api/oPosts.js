@@ -122,7 +122,12 @@ router.get('/:id', async (req, res, next) => {
               as: 'issuedTo',
             },
           ],
-          where: { accepted: true },
+          where: {
+            accepted: true,
+            responseRating: {
+              $ne: null,
+            },
+          },
           required: false,
         },
       ],

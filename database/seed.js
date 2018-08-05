@@ -77,26 +77,91 @@ newUsers = [
   },
 ];
 
-newPosts = [
-  {
-    accepted: true,
-    issuedToId: 1,
-    responsePicture:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf2qwUV3gL71did5ydYf4hIifEx0_2g0ZvqlIFY8ptQXyP9SiaTA',
-    responseText: 'Was Cool',
-    originalPostId: 1,
-    responseRating: 77,
-  },
-];
-
 originalPosts = [
   {
+    id: 1,
     text: 'Go Skydiving',
     rating: 100,
     picture:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf2qwUV3gL71did5ydYf4hIifEx0_2g0ZvqlIFY8ptQXyP9SiaTA',
-    issuedFromId: 1,
-    location: [-74.007624, 40.705137],
+    issuedFromId: 7,
+    location: [40.8151, 72.8664],
+  },
+  {
+    id: 2,
+    text: 'Ride King Da Kah',
+    rating: 100,
+    picture: 'https://www.sixflags.com/sites/default/files/kingda_ka_1.jpg',
+    issuedFromId: 2,
+    location: [40.1361077889, -74.4377799155],
+  },
+  {
+    id: 3,
+    text: 'Selfie With Statue Of Liberty',
+    rating: 88,
+    picture:
+      'https://www.rd.com/wp-content/uploads/2016/01/01-statue-of-liberty-facts.jpg',
+    issuedFromId: 3,
+    location: [40.689247, -74.044502],
+  },
+];
+
+newPosts = [
+  // Completed
+  {
+    accepted: true,
+    originalPostId: 1,
+    issuedToId: 3,
+    responseRating: 88,
+    responseText: 'Really scary experience but was awesome',
+  },
+  {
+    accepted: true,
+    originalPostId: 1,
+    issuedToId: 4,
+    responseRating: 55,
+    responseText: 'Felt like I was gonna die!',
+    responsePicture:
+      'https://i2.wp.com/skysthelimit.net/wp-content/uploads/2015/01/10543540_10202397611489807_1460235016898599055_o.png?fit=1100%2C733&ssl=1',
+  },
+  {
+    accepted: true,
+    originalPostId: 3,
+    issuedToId: 1,
+    responseRating: 95,
+    responseText: 'Haha cool, liked the trip up there!',
+    responsePicture:
+      'https://128bfe101e468ad0417c-d8631487b453c9c2c5c26c67f934f4a1.ssl.cf1.rackcdn.com/artworks/artwork_5887e5c129421.jpg',
+  },
+  {
+    accepted: true,
+    originalPostId: 2,
+    issuedToId: 6,
+    responseRating: 95,
+    responseText: 'Best ride at the park, super cool!',
+    responsePicture:
+      'https://earthtripper.com/sites/default/files/Kingda_Ka-1.jpg',
+  },
+  {
+    accepted: true,
+    originalPostId: 2,
+    issuedToId: 3,
+    responseRating: 45,
+    responseText: 'felt like throwin thef up lol!',
+    responsePicture:
+      'http://gadv.com/park/assets/images/14-04-19-Zumanjaro-2.jpg',
+  },
+  // Pending
+  {
+    accepted: true,
+    originalPostId: 2,
+    issuedToId: 1,
+  },
+  // Not Accepted
+  {
+    accepted: false,
+    originalPostId: 3,
+    issuedToId: 1,
   },
 ];
 

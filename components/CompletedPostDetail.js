@@ -14,7 +14,7 @@ import SeeMoreButton from './SeeMoreButton';
 
 const CompletedPostDetail = ({ posts, navigation }) => {
   const { responseRating, responseText, responsePicture } = posts;
-  console.log('props: ', posts);
+  console.log('POOOOSTTS: ', posts.originalPost.posts.length);
 
   const {
     thumbnailStyle,
@@ -28,11 +28,18 @@ const CompletedPostDetail = ({ posts, navigation }) => {
     textStyle,
     responseContainerStyle,
     responsePictureStyle,
+    container,
   } = styles;
 
   return (
     <TopContainer>
       <Container>
+        {/* <View style={thumbnailContainerStyle}>
+          <Image
+            style={thumbnailStyle}
+            source={{ uri: posts.originalPost.issuedFrom.picture }}
+          />
+        </View> */}
         <View style={headerContentStyle}>
           <Text style={headerTextStyle}>
             Original Post: {posts.originalPost.text}
@@ -43,12 +50,16 @@ const CompletedPostDetail = ({ posts, navigation }) => {
               ' ' +
               posts.originalPost.issuedFrom.lastName}
           </Text>
-          <Container>
-            <Image
-              style={responsePictureStyle}
-              source={{ uri: responsePicture }}
-            />
-          </Container>
+          <Text style={headerTextStyle}>
+            Completed by: {posts.originalPost.posts.length} people
+          </Text>
+        </View>
+      </Container>
+      <Container>
+        <Image style={imageStyle} source={{ uri: responsePicture }} />
+      </Container>
+      <Container>
+        <View style={headerTextStyle}>
           <Text style={headerTextStyle}>Your Response: {responseText}</Text>
           {responseRating > 90 ? (
             <Text>Rated: {responseRating} 🔥🔥🔥</Text>
@@ -61,26 +72,34 @@ const CompletedPostDetail = ({ posts, navigation }) => {
           ) : (
             <Text>Rated: {responseRating} 👎</Text>
           )}
-          <SeeMoreButton
-            onPress={() => {
-              navigation.navigate('SeeCompletedPostDetail', {
-                post: { posts },
-              });
-            }}
-          >
-            See More
-          </SeeMoreButton>
         </View>
+      </Container>
+      <Container>
+        <SeeMoreButton
+          onPress={() => {
+            navigation.navigate('SeeCompletedPostDetail', {
+              post: { posts },
+            });
+          }}
+        >
+          See More
+        </SeeMoreButton>
       </Container>
     </TopContainer>
   );
 };
 
 const styles = {
+  container: {
+    flex: 1,
+    alignItems: `center`,
+    // justifyContent: `center`,
+    backgroundColor: '#FFFFFF',
+  },
   thumbnailStyle: {
-    height: 50,
-    width: 50,
-    borderRadius: 25,
+    height: 40,
+    width: 40,
+    borderRadius: 20,
   },
   responsePictureStyle: {
     height: 250,
@@ -105,6 +124,11 @@ const styles = {
     width: '100%',
     textAlign: 'center',
     fontFamily: 'Helvetica Neue',
+  },
+  imageStyle: {
+    height: 200,
+    flex: 1,
+    width: null,
   },
 };
 

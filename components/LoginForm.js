@@ -37,10 +37,13 @@ class LoginForm extends Component {
 
   async handleSubmit(evt) {
     try {
-      const response = await axios.put(`http://localhost:1337/api/auth/login`, {
-        username: this.state.username,
-        password: this.state.password,
-      });
+      const response = await axios.put(
+        `http://192.168.1.11:1337/api/auth/login`,
+        {
+          username: this.state.username,
+          password: this.state.password,
+        }
+      );
       this.setState({ user: response.data });
       this.props.navigation.navigate('AllUsers', { user: this.state.user });
     } catch (error) {
@@ -53,6 +56,10 @@ class LoginForm extends Component {
     console.log('state: ', this.state);
     return (
       <View style={styles.container}>
+        <Image
+          style={styles.thumbnailStyle}
+          source={require('../public/inizio.png')}
+        />
         <Container>
           <View style={styles.container}>
             <Container>
@@ -102,7 +109,8 @@ const styles = {
   container: {
     flex: 1,
     alignItems: `center`,
-    justifyContent: `center`,
+    // justifyContent: `center`,
+    backgroundColor: '#03396c',
   },
   textStyle: {
     height: 30,
@@ -111,9 +119,8 @@ const styles = {
     fontSize: 14,
   },
   thumbnailStyle: {
-    height: 80,
-    width: 80,
-    borderRadius: 40,
+    height: 200,
+    width: 200,
   },
   thumbnailContainerStyle: {
     justifyContent: 'center',

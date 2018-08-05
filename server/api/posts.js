@@ -94,6 +94,9 @@ router.get('/completed/:id', async (req, res, next) => {
             },
             {
               model: Posts,
+              where: {
+                accepted: true,
+              },
               include: [
                 {
                   model: Users,

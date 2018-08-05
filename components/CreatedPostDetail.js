@@ -47,7 +47,7 @@ const CreatedPostDetail = ({ posts, navigation }) => {
             <Text>Rated: {rating} 👎</Text>
           )}
           <Text style={headerTextStyle}>
-            Accepted by: {posts.posts.length} friends
+            Completed by: {posts.posts.length} friends
           </Text>
           <SeeMoreButton
             onPress={() => {
