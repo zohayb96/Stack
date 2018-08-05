@@ -120,7 +120,15 @@ originalPosts = [
     picture:
       'https://d1v5vpeyrmf36z.cloudfront.net/media/CACHE/images/uploads/zinnia/Rink_Friends_2/f24617ae83a8564c90aaacb57327bdc7.jpg',
     issuedFromId: 1,
-    location: [440.7587, 73.9787],
+    location: [40.7587, 73.9787],
+  },
+  {
+    id: 6,
+    text: 'Visit Lion At Bronx Zoo',
+    rating: 90,
+    picture: 'http://www.krugerpark.co.za/images/1-lion-charge-gc590a.jpg',
+    issuedFromId: 4,
+    location: [40.8506, 73.877],
   },
 ];
 
@@ -132,6 +140,17 @@ newPosts = [
     issuedToId: 3,
     responseRating: 88,
     responseText: 'Really scary experience but was awesome',
+    responsePicture:
+      'https://www.skydivelongisland.com/images/article/skydiving-facts-that-may-surprise-you.jpg',
+  },
+  {
+    accepted: true,
+    originalPostId: 6,
+    issuedToId: 1,
+    responseRating: 88,
+    responseText: 'Love lions hehe',
+    responsePicture:
+      'https://media-cdn.tripadvisor.com/media/photo-s/10/a3/d7/ee/pair-of-male-lions.jpg',
   },
   {
     accepted: true,

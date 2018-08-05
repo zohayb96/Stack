@@ -25,7 +25,7 @@ const styles = {
     width: 100,
     alignSelf: 'stretch',
     borderRadius: 5,
-    backgroundColor: '#00653B',
+    backgroundColor: 'green',
   },
 };
 
