@@ -17,8 +17,7 @@ const PendingPostDetail = ({ posts, navigation, user }) => {
   console.log(posts);
   const currentUser = user;
   const { originalPost } = posts;
-  // const { picture, text, rating } = originalPost;
-  console.log(originalPost);
+  const { picture, text, rating } = originalPost;
   const {
     thumbnailStyle,
     headerContentStyle,
@@ -32,41 +31,40 @@ const PendingPostDetail = ({ posts, navigation, user }) => {
   } = styles;
 
   return (
-    // <TopContainer>
-    //   <Container>
-    //     <View style={thumbnailContainerStyle}>
-    //       <Image style={thumbnailStyle} source={{ uri: picture }} />
-    //     </View>
-    //     <View style={headerContentStyle}>
-    //       <Text style={headerTextStyle}>Post: {text}</Text>
-    //       {rating > 90 ? (
-    //         <Text>Rated: {rating} 🔥🔥🔥</Text>
-    //       ) : rating > 80 ? (
-    //         <Text>Rated: {rating} 🔥🔥</Text>
-    //       ) : rating > 70 ? (
-    //         <Text>Rated: {rating} 🔥</Text>
-    //       ) : rating > 50 ? (
-    //         <Text>Rated: {rating} 👍</Text>
-    //       ) : (
-    //         <Text>Rated: {rating} 👎</Text>
-    //       )}
-    //       <Text style={headerTextStyle}>
-    //         Accepted by: {originalPost.posts.length} friends
-    //       </Text>
-    //       <SeeMoreButton
-    //         onPress={() => {
-    //           navigation.navigate('SeePendingPostDetail', {
-    //             originalPost: { originalPost },
-    //             currentUser: { currentUser },
-    //           });
-    //         }}
-    //       >
-    //         See More
-    //       </SeeMoreButton>
-    //     </View>
-    //   </Container>
-    // </TopContainer>
-    <Text>ok</Text>
+    <TopContainer>
+      <Container>
+        <View style={thumbnailContainerStyle}>
+          <Image style={thumbnailStyle} source={{ uri: picture }} />
+        </View>
+        <View style={headerContentStyle}>
+          <Text style={headerTextStyle}>Post: {text}</Text>
+          {rating > 90 ? (
+            <Text>Rated: {rating} 🔥🔥🔥</Text>
+          ) : rating > 80 ? (
+            <Text>Rated: {rating} 🔥🔥</Text>
+          ) : rating > 70 ? (
+            <Text>Rated: {rating} 🔥</Text>
+          ) : rating > 50 ? (
+            <Text>Rated: {rating} 👍</Text>
+          ) : (
+            <Text>Rated: {rating} 👎</Text>
+          )}
+          <Text style={headerTextStyle}>
+            Accepted by: {originalPost.posts.length} friends
+          </Text>
+          <SeeMoreButton
+            onPress={() => {
+              navigation.navigate('SeePendingPostDetail', {
+                originalPost: { originalPost },
+                currentUser: { currentUser },
+              });
+            }}
+          >
+            See More
+          </SeeMoreButton>
+        </View>
+      </Container>
+    </TopContainer>
   );
 };
 

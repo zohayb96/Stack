@@ -139,6 +139,7 @@ router.get('/pending/:id', async (req, res, next) => {
                   $ne: null,
                 },
               },
+              required: false,
               include: [
                 {
                   model: Users,
