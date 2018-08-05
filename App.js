@@ -25,6 +25,7 @@ import SeeCreatedPostDetail from './components/SeeCreatedPostDetail';
 import SeeCompletedPostDetail from './components/SeeCompletedPostDetail';
 import SeePendingPostDetail from './components/SeePendingPostDetail';
 import ReviewPost from './components/ReviewPost';
+import Settings from './components/Settings';
 // import ARView from './components/ARView';
 
 const RootNavigator = createStackNavigator(
@@ -132,6 +133,12 @@ const RootNavigator = createStackNavigator(
       screen: ReviewPost,
       navigationOptions: ({ navigation }) => ({
         title: `Review`,
+      }),
+    },
+    Settings: {
+      screen: Settings,
+      navigationOptions: ({ navigation }) => ({
+        title: `Settings`,
       }),
     },
   },

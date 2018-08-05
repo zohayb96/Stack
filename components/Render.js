@@ -204,16 +204,16 @@ export default createBottomTabNavigator(
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-        if (routeName === 'Render') {
-          iconName = `ios-contact${focused ? '' : '-outline'}`;
-          // } else if (routeName === 'Friends') {
-          //   iconName = `ios-contacts${focused ? '' : '-outline'}`;
-          // } else if (routeName === 'Add') {
-          //   iconName = `ios-add-circle${focused ? '' : '-outline'}`;
-          // } else if (routeName === 'Map') {
-          //   iconName = `ios-map${focused ? '' : '-outline'}`;
-          // } else if (routeName === 'Settings') {
-          //   iconName = `ios-settings${focused ? '' : '-outline'}`;
+        if (routeName === 'Happy') {
+          iconName = `ios-happy${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Love') {
+          iconName = `ios-heart${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Custom') {
+          iconName = `ios-cube${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Surprise') {
+          iconName = `ios-love${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Angry') {
+          iconName = `ios-alert${focused ? '' : '-outline'}`;
         }
         return <Ionicons name={iconName} size={25} color={tintColor} />;
       },

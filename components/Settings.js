@@ -15,8 +15,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { ImagePicker, Permissions } from 'expo';
 import Home from './Home';
 import Button from './Button';
+import NegativeButton from './NegativeButton';
 import TopContainer from './TopContainer';
 import Container from './Container';
+import { withNavigation } from 'react-navigation';
 
 class Settings extends Component {
   constructor() {
@@ -57,6 +59,11 @@ class Settings extends Component {
     }
   }
 
+  handleLogout() {
+    const { navigation } = this.props;
+    navigation.navigate('Home');
+  }
+
   async componentWillMount() {
     const { navigation } = this.props;
     const user = navigation.getParam('user');
@@ -78,6 +85,7 @@ class Settings extends Component {
 
   render() {
     let { picture } = this.state;
+    const { navigation } = this.props;
     console.log(this.state);
     const {
       firstName,
@@ -155,6 +163,18 @@ class Settings extends Component {
             <Container>
               <Button onPress={this.handleSubmit}>Done</Button>
             </Container>
+            <Container>
+              <Text>Or</Text>
+            </Container>
+            <Container>
+              <NegativeButton
+                onPress={() => {
+                  navigation.navigate('LoginForm');
+                }}
+              >
+                Log Out
+              </NegativeButton>
+            </Container>
           </View>
         </Container>
       </View>
@@ -213,4 +233,4 @@ const styles = {
   },
 };
 
-export default Settings;
+export default withNavigation(Settings);

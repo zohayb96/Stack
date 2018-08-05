@@ -14,7 +14,6 @@ import SeeMoreButton from './SeeMoreButton';
 
 const CompletedPostDetail = ({ posts, navigation }) => {
   const { responseRating, responseText, responsePicture } = posts;
-  console.log('POOOOSTTS: ', posts.originalPost.posts.length);
 
   const {
     thumbnailStyle,

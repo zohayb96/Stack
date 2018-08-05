@@ -12,8 +12,8 @@ class MapToView extends React.Component {
     this.state = {
       latitude: 40.73061,
       longitude: -73.935242,
-      latitudeDelta: 0.01,
-      longitudeDelta: 0.01,
+      latitudeDelta: 0.5,
+      longitudeDelta: 0.5,
       allPosts: [],
     };
   }
@@ -56,8 +56,8 @@ class MapToView extends React.Component {
           initialRegion={{
             latitude: 40.73061,
             longitude: -73.935242,
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05,
+            latitudeDelta: 0.5,
+            longitudeDelta: 0.5,
           }}
           region={{
             latitude: this.state.latitude,
