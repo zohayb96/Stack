@@ -11,6 +11,7 @@ router.put('/update', async (req, res, next) => {
       where: {
         originalPostId: req.body.originalPostId,
         issuedToId: req.body.issuedToId,
+        responseRating: null,
       },
     });
     const createdPost = await postToUpdate.update(req.body);
