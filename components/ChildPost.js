@@ -56,9 +56,12 @@ class ChildPost extends Component {
             )}
           </View>
         </Container>
-        <Container>
-          <Image style={imageStyle} source={{ uri: responsePicture }} />
-        </Container>
+        {responsePicture ===
+        'https://uploads-ssl.webflow.com/57e5747bd0ac813956df4e96/5aebae14c6d254621d81f826_placeholder.png' ? null : (
+          <Container>
+            <Image style={imageStyle} source={{ uri: responsePicture }} />
+          </Container>
+        )}
       </TopContainer>
     );
   }

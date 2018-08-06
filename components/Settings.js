@@ -41,7 +41,7 @@ class Settings extends Component {
     try {
       const { navigation } = this.props;
       const user = navigation.getParam('user');
-      await axios.put(`http://192.168.1.16:1337/api/users/${user.id}`, {
+      await axios.put(`http://10.2.6.34:1337/api/users/${user.id}`, {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         username: this.state.username,
@@ -51,7 +51,7 @@ class Settings extends Component {
       });
       // get user info
       const response = await axios.get(
-        `http://192.168.1.16:1337/api/users/${user.id}`
+        `http://10.2.6.34:1337/api/users/${user.id}`
       );
       this.setState({ user: response.data });
     } catch (error) {
@@ -68,7 +68,7 @@ class Settings extends Component {
     const { navigation } = this.props;
     const user = navigation.getParam('user');
     const response = await axios.get(
-      `http://192.168.1.16:1337/api/users/${user.id}`
+      `http://10.2.6.34:1337/api/users/${user.id}`
     );
 
     this.setState({
@@ -100,9 +100,6 @@ class Settings extends Component {
       <View style={styles.container}>
         <Container>
           <View style={styles.container}>
-            <Container>
-              <Text style={styles.headerTextStyle}>Name</Text>
-            </Container>
             <View>
               <Image style={styles.thumbnailStyle} source={{ uri: picture }} />
             </View>

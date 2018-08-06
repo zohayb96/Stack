@@ -20,6 +20,7 @@ module.exports = db.define('originalPosts', {
   },
   picture: {
     type: TEXT,
+    required: true,
   },
   location: ARRAY(DECIMAL),
 });

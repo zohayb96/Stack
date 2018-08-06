@@ -13,6 +13,7 @@ import { createBottomTabNavigator, TabBarBottom } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 import TopContainer from './TopContainer';
 import Container from './Container';
+import SeeMoreButton from './SeeMoreButton';
 import { createStackNavigator } from 'react-navigation';
 import CreatedPostDetail from './CreatedPostDetail';
 import CompletedPostDetail from './CompletedPostDetail';
@@ -29,6 +30,7 @@ class UserProfile extends Component {
       pendingPosts: [],
       selectedIndex: 0,
     };
+    this.pullFeed = this.pullFeed.bind(this);
   }
 
   static navigationOptions = {
@@ -39,16 +41,16 @@ class UserProfile extends Component {
     const { navigation } = this.props;
     const user = navigation.getParam('user');
     const userData = await axios.get(
-      `http://192.168.1.16:1337/api/users/${user.id}`
+      `http://10.2.6.34:1337/api/users/${user.id}`
     );
     const createdOriginalPostsData = await axios.get(
-      `http://192.168.1.16:1337/api/Oposts/${user.id}`
+      `http://10.2.6.34:1337/api/Oposts/${user.id}`
     );
     const completedPostsData = await axios.get(
-      `http://192.168.1.16:1337/api/posts/completed/${user.id}`
+      `http://10.2.6.34:1337/api/posts/completed/${user.id}`
     );
     const pendingPostData = await axios.get(
-      `http://192.168.1.16:1337/api/posts/pending/${user.id}`
+      `http://10.2.6.34:1337/api/posts/pending/${user.id}`
     );
     this.setState({
       user: userData.data,
@@ -56,6 +58,30 @@ class UserProfile extends Component {
       completedPosts: completedPostsData.data,
       pendingPosts: pendingPostData.data,
     });
+  }
+
+  async pullFeed() {
+    const { navigation } = this.props;
+    const user = navigation.getParam('user');
+    const userData = await axios.get(
+      `http://10.2.6.34:1337/api/users/${user.id}`
+    );
+    const createdOriginalPostsData = await axios.get(
+      `http://10.2.6.34:1337/api/Oposts/${user.id}`
+    );
+    const completedPostsData = await axios.get(
+      `http://10.2.6.34:1337/api/posts/completed/${user.id}`
+    );
+    const pendingPostData = await axios.get(
+      `http://10.2.6.34:1337/api/posts/pending/${user.id}`
+    );
+    this.setState({
+      user: userData.data,
+      createdOriginalPosts: createdOriginalPostsData.data,
+      completedPosts: completedPostsData.data,
+      pendingPosts: pendingPostData.data,
+    });
+    console.log(this.state);
   }
 
   renderCreated() {
@@ -106,6 +132,14 @@ class UserProfile extends Component {
             <Text style={styles.headerTextStyle}>
               {firstName + ' ' + lastName}
             </Text>
+            <View>
+              <TouchableOpacity
+                style={styles.buttonStyle}
+                onPress={this.pullFeed}
+              >
+                <Text style={styles.buttonTextStyle}>Refresh</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </Container>
         <SegmentedControlIOS
@@ -151,6 +185,10 @@ const styles = {
     flex: 1,
     // marginLeft: 10,
     // marginRight: 10,
+  },
+  buttonContainerStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   headerTextStyle: {
     fontSize: 18,

@@ -31,7 +31,7 @@ class MapToView extends React.Component {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
     const response = await axios.get(
-      `http://192.168.1.16:1337/api/oPosts/forUsers`
+      `http://10.2.6.34:1337/api/oPosts/forUsers`
     );
     this.setState({
       allPosts: response.data,
@@ -53,6 +53,8 @@ class MapToView extends React.Component {
           loadingBackgroundColor="#eeeeee"
           showsUserLocation={true}
           showsPointsOfInterest={false}
+          showsBuildings={false}
+          showsCompass={false}
           initialRegion={{
             latitude: 40.73061,
             longitude: -73.935242,

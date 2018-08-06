@@ -80,7 +80,7 @@ class InputForm extends Component {
     try {
       let count = 0;
       const newOriginalPost = await axios.post(
-        'http://192.168.1.16:1337/api/oPosts/create',
+        'http://10.2.6.34:1337/api/oPosts/create',
         {
           text: this.state.text,
           picture: this.state.picture,

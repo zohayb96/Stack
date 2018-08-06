@@ -34,7 +34,8 @@ class ReviewPost extends Component {
     super(props);
     this.state = {
       responseText: '',
-      responsePicture: null,
+      responsePicture:
+        'https://uploads-ssl.webflow.com/57e5747bd0ac813956df4e96/5aebae14c6d254621d81f826_placeholder.png',
       responseRating: '',
       issuedToId: 0,
       originalPostId: 0,
@@ -80,7 +81,7 @@ class ReviewPost extends Component {
     console.log('currentUserDataId: ', currentUserId);
     try {
       const newOriginalPost = await axios.put(
-        'http://192.168.1.16:1337/api/posts/update',
+        'http://10.2.6.34:1337/api/posts/update',
         {
           originalPostId: originalPostData.id,
           responsePicture: this.state.responsePicture,

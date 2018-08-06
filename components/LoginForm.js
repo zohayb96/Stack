@@ -37,13 +37,10 @@ class LoginForm extends Component {
 
   async handleSubmit(evt) {
     try {
-      const response = await axios.put(
-        `http://192.168.1.16:1337/api/auth/login`,
-        {
-          username: this.state.username,
-          password: this.state.password,
-        }
-      );
+      const response = await axios.put(`http://10.2.6.34:1337/api/auth/login`, {
+        username: this.state.username,
+        password: this.state.password,
+      });
       this.setState({ user: response.data });
       this.props.navigation.navigate('AllUsers', { user: this.state.user });
     } catch (error) {

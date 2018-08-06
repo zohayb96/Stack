@@ -3,7 +3,7 @@ import { Text, View, Image, Linking } from 'react-native';
 import TopContainer from './TopContainer';
 import Container from './Container';
 
-const AlbumDetail = ({ user }) => {
+const UserDetail = ({ user }) => {
   const { firstName, lastName, username, email, picture, image, url } = user;
   const {
     thumbnailStyle,
@@ -54,4 +54,4 @@ const styles = {
   },
 };
 
-export default AlbumDetail;
+export default UserDetail;
