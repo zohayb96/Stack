@@ -5,7 +5,7 @@ const Op = Sequelize.Op;
 const { Users, Posts, OriginalPost } = require('../../database/');
 const router = require('express').Router();
 
-router.put('/create', async (req, res, next) => {
+router.put('/update', async (req, res, next) => {
   try {
     const postToUpdate = await Posts.findOne({
       where: {
@@ -14,6 +14,20 @@ router.put('/create', async (req, res, next) => {
       },
     });
     const createdPost = await postToUpdate.update(req.body);
+    if (createdPost) {
+      res.status(201).json(createdPost);
+    } else {
+      res.sendStatus(500);
+    }
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+});
+
+router.post('/create', async (req, res, next) => {
+  try {
+    const createdPost = Posts.create(req.body);
     if (createdPost) {
       res.status(201).json(createdPost);
     } else {

@@ -80,7 +80,7 @@ class ReviewPost extends Component {
     console.log('currentUserDataId: ', currentUserId);
     try {
       const newOriginalPost = await axios.put(
-        'http://192.168.1.16:1337/api/posts/create',
+        'http://192.168.1.16:1337/api/posts/update',
         {
           originalPostId: originalPostData.id,
           responsePicture: this.state.responsePicture,

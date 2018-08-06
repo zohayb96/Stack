@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Image, Alert } from 'react-native';
 import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons';
 import Home from './Home';
@@ -53,7 +53,9 @@ class SinglePost extends Component {
         issuedToId: userId,
         accepted: true,
       });
+      Alert.alert('Added!');
     } catch (err) {
+      Alert.alert('Error!');
       console.log(err);
     }
   }
