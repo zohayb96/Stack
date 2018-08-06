@@ -1,28 +1,240 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
-import axios from 'axios';
-import { createBottomTabNavigator, TabBarBottom } from 'react-navigation';
-import { Ionicons } from '@expo/vector-icons';
-import Home from './Home';
+import React from 'react';
+import * as THREE from 'three';
+import ExpoTHREE from 'expo-three';
+import Expo, { Asset, Camera, Permissions } from 'expo';
+require('../utils/OBJLoader');
+import {
+  View,
+  NativeModules,
+  StatusBar,
+  StyleSheet,
+  Dimensions,
+  Image,
+  Text,
+} from 'react-native';
+import { Button } from 'react-native-elements';
+import { connect } from 'react-redux';
+const { _getLocationAsync } = require('../utils');
 
-class Login extends Component {
-  state = {
-    challenges: [],
+console.disableYellowBox = true;
+// Turn off three.js warnings...
+const originalWarn = console.warn.bind(console);
+console.warn = text => !text.includes('THREE') && originalWarn(text);
+
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      toSave: false,
+      saveClicked: 0,
+      itemCount: 0,
+    };
+    this.gameItems = [];
+    this.geolocation = [];
+    this.model = null;
+  }
+
+  async componentWillMount() {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    this.setState({ hasCameraPermission: status === 'granted' });
+  }
+
+  componentDidMount() {
+    _getLocationAsync().then(location => {
+      this.geolocation = [location.coords.latitude, location.coords.longitude];
+    });
+  }
+
+  handleDrop = () => {
+    const newItem = dropItem(this.model, this.camera.position);
+    this.scene.add(newItem);
+    this.gameItems.push(newItem);
+    const cords = {
+      x: newItem.position.x,
+      y: newItem.position.y,
+      z: newItem.position.z,
+    };
+    this.props.itemCords.push(cords);
+    this.props.addItem(this.props.itemCords);
+    this.setState({ itemCount: this.gameItems.length });
   };
 
-  render() {
-    console.log(this.state);
+  handleSave = () => {
+    this.setState({ toSave: true, saveClicked: this.state.saveClicked + 1 });
+  };
 
-    return <View />;
+  _onGLContextCreate = async gl => {
+    const width = gl.drawingBufferWidth;
+    const height = gl.drawingBufferHeight;
+    // Starts an AR session
+    this.arSession = await this._glView.startARSessionAsync();
+    const renderer = ExpoTHREE.createRenderer({ gl });
+    renderer.setSize(width, height);
+    this.scene = new THREE.Scene();
+
+    this.scene.background = ExpoTHREE.createARBackgroundTexture(
+      this.arSession,
+      renderer
+    );
+
+    this.camera = ExpoTHREE.createARCamera(
+      this.arSession, // field of view
+      width, // aspect ratio
+      height, // aspect ratio
+      0.01, // near clipping plane
+      1000 // far clipping plane
+    );
+
+    // Lighting to show shading
+    generateLighting(this.scene);
+
+    this.model = await loadModel();
+
+    const animate = () => {
+      this.camera.position.setFromMatrixPosition(this.camera.matrixWorld);
+      const cameraPos = new THREE.Vector3(0, 0, 0);
+      cameraPos.applyMatrix4(this.camera.matrixWorld);
+
+      this.gameItems.forEach(banana => {
+        // Animates items for live movement
+        banana.rotation.x += banana.speed;
+        banana.rotation.y += banana.speed;
+      });
+
+      // Adds AR overlay over camera view
+      renderer.render(this.scene, this.camera);
+      gl.endFrameEXP();
+      this.gameRequest = requestAnimationFrame(animate);
+    };
+    animate();
+  };
+
+  // Kill ARSession and cancel animation frame request
+
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+        <StatusBar hidden={true} />
+
+        <Expo.GLView
+          ref={ref => (this._glView = ref)}
+          style={{ flex: 1 }}
+          onContextCreate={this._onGLContextCreate}
+        />
+
+        <View style={styles.drop}>
+          <Button
+            raised
+            rounded
+            title="Drop"
+            onPress={this.handleDrop}
+            buttonStyle={{
+              backgroundColor: '#29B46E',
+              width: 100,
+              height: 100,
+            }}
+          />
+        </View>
+
+        <View style={styles.badge}>
+          <Button
+            raised
+            rounded
+            title="Save"
+            onPress={this.handleSave}
+            buttonStyle={{
+              backgroundColor: '#29B46E',
+              height: 35,
+              padding: 0,
+            }}
+            textStyle={{ fontSize: 13 }}
+          />
+        </View>
+
+        <View style={styles.items}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text>{this.state.itemCount}</Text>
+          </View>
+        </View>
+      </View>
+    );
   }
 }
 
+const { height, width } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: `center`,
-    justifyContent: `center`,
+  drop: {
+    position: 'absolute',
+    top: height - 250,
+    left: width / 2 - 60,
+  },
+  badge: {
+    position: 'absolute',
+    top: 17,
+    left: 10,
+  },
+  items: {
+    position: 'absolute',
+    top: 60,
+    left: 25,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 8,
+    marginRight: 5,
+  },
+  exitButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
   },
 });
+
+async function loadModel() {
+  // Load the banana model
+  const modelAsset = loader.load('../assets/banana3.obj');
+  await modelAsset.downloadAsync();
+
+  const bananaMaterial = new THREE.MeshPhongMaterial({
+    color: '#FFFF00',
+    specular: 0x555555,
+    shininess: 100,
+  });
+  const loader = new THREE.OBJLoader();
+
+  return new Promise(function executor(resolve) {
+    loader.load(modelAsset.localUri, function(object) {
+      //Adds color to banana but will need lighting to see it
+      //See generateLighting function
+      object.traverse(function(child) {
+        if (child instanceof THREE.Mesh) {
+          child.material = bananaMaterial;
+        }
+      });
+      resolve(object);
+    });
+  });
+}
+
+function dropItem(model, dropPos) {
+  const item = model.clone();
+  item.position.x = dropPos.x;
+  item.position.y = dropPos.y;
+  item.position.z = dropPos.z;
+  item.speed = 0.05;
+  return item;
+}
+
+function generateLighting(scene) {
+  const leftLight = new THREE.DirectionalLight(0xffffff);
+  const rightLight = new THREE.DirectionalLight(0xffffff);
+  const bottomLight = new THREE.DirectionalLight(0xffffff);
+  leftLight.position.set(-3, 5, 0).normalize();
+  rightLight.position.set(3, 5, 0).normalize();
+  bottomLight.position.set(0, -5, 0).normalize();
+  scene.add(leftLight);
+  scene.add(rightLight);
+  scene.add(bottomLight);
+}
 
 export default Login;

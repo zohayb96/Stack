@@ -76,19 +76,19 @@ class SeePendingPostDetail extends Component {
               <ChildPost key={post.id} childrenPosts={post} id={post.id} />
             );
           })}
+          <Container>
+            <Button
+              onPress={() => {
+                this.props.navigation.navigate('ReviewPost', {
+                  originalPost: { postData },
+                  currentUser: { currentUser },
+                });
+              }}
+            >
+              Review Post
+            </Button>
+          </Container>
         </ScrollView>
-        <Container>
-          <Button
-            onPress={() => {
-              this.props.navigation.navigate('ReviewPost', {
-                originalPost: { postData },
-                currentUser: { currentUser },
-              });
-            }}
-          >
-            Review Post
-          </Button>
-        </Container>
       </TopContainer>
     );
   }

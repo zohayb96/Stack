@@ -34,7 +34,7 @@ const RootNavigator = createStackNavigator(
       screen: Home,
       navigationOptions: ({ navigation }) => ({
         header: null,
-        title: `AR Mappr`,
+        title: `Inizio`,
       }),
     },
     SignUp: {

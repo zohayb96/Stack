@@ -21,11 +21,11 @@ import { withNavigation } from 'react-navigation';
 import SeeMoreButton from './SeeMoreButton';
 
 const defaultState = {
-  postText: '',
-  postPicture: null,
-  locationText: '',
-  latitude: null,
-  longitude: null,
+  originalPostId: 0,
+  issuedToId: 0,
+  responseRating: '',
+  responsePicture: null,
+  responseText: '',
   error: null,
 };
 
@@ -33,10 +33,13 @@ class ReviewPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      postText: '',
-      postPicture: null,
-      locationText: '',
+      responseText: '',
+      responsePicture: null,
+      responseRating: '',
+      issuedToId: 0,
+      originalPostId: 0,
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   // Message to user when post is successfully posted
@@ -64,6 +67,37 @@ class ReviewPost extends Component {
     );
   };
 
+  async handleSubmit(evt) {
+    const { navigation } = this.props;
+    const currentUser = navigation.getParam('currentUser');
+    const currentUserId = currentUser.currentUser.currentUser.id;
+    const originalPost = navigation.getParam('originalPost');
+    const originalPostData = originalPost.postData;
+    console.log('originalPostId: ', originalPostData.id);
+    console.log('responsePicture: ', this.state.responsePicture);
+    console.log('responseRating: ', this.state.responseRating);
+    console.log('responseText: ', this.state.responseText);
+    console.log('currentUserDataId: ', currentUserId);
+    try {
+      const newOriginalPost = await axios.put(
+        'http://192.168.1.16:1337/api/posts/create',
+        {
+          originalPostId: originalPostData.id,
+          responsePicture: this.state.responsePicture,
+          responseRating: this.state.responseRating,
+          responseText: this.state.responseText,
+          issuedToId: currentUserId,
+          accepted: true,
+        }
+      );
+      this.setState(defaultState);
+      this.showAlert();
+    } catch (err) {
+      this.showFailAlert();
+      console.log(err);
+    }
+  }
+
   render() {
     const { navigation } = this.props;
     const currentUser = navigation.getParam('currentUser');
@@ -80,9 +114,7 @@ class ReviewPost extends Component {
       sceneContainer,
       textStyle,
     } = styles;
-
-    console.log(this.state);
-    let { postPicture } = this.state;
+    let { responsePicture } = this.state;
     const originalPost = navigation.getParam('originalPost');
     const originalPostData = originalPost.postData;
     const { picture, text, rating, issuedFrom } = originalPostData;
@@ -116,9 +148,9 @@ class ReviewPost extends Component {
           <View
             style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
           >
-            {postPicture && (
+            {responsePicture && (
               <Image
-                source={{ uri: postPicture }}
+                source={{ uri: responsePicture }}
                 style={{
                   height: 250,
                   width: 250,
@@ -129,18 +161,18 @@ class ReviewPost extends Component {
         </Container>
         <Container>
           <TextInput
-            name="postText"
-            value={this.state.postText}
-            onChangeText={postText => this.setState({ postText })}
+            name="responseText"
+            value={this.state.responseText}
+            onChangeText={responseText => this.setState({ responseText })}
             placeholder="Add your review here"
             style={styles.textStyle}
           />
         </Container>
         <Container>
           <TextInput
-            name="locationText"
-            value={this.state.locationText}
-            onChangeText={locationText => this.setState({ locationText })}
+            name="responseRating"
+            value={this.state.responseRating}
+            onChangeText={responseRating => this.setState({ responseRating })}
             placeholder="Add your rating: 0-100 "
             style={styles.textStyle}
           />
@@ -149,7 +181,12 @@ class ReviewPost extends Component {
           <SeeMoreButton onPress={this.pickImage}>Image</SeeMoreButton>
         </Container>
         <Container>
-          <Button>Complete</Button>
+          <SeeMoreButton onPress={this.pickImageFromCamera}>
+            Camera
+          </SeeMoreButton>
+        </Container>
+        <Container>
+          <Button onPress={this.handleSubmit}>Complete</Button>
         </Container>
       </TopContainer>
     );
@@ -161,9 +198,19 @@ class ReviewPost extends Component {
       aspect: [4, 3],
     });
     if (!result.cancelled) {
-      this.setState({ postPicture: result.uri });
+      this.setState({ responsePicture: result.uri });
     }
     console.log(this.state);
+  };
+  pickImageFromCamera = async () => {
+    let result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+    });
+    if (!result.cancelled) {
+      this.setState({ responsePicture: result.uri });
+    }
+    console.log('STATE: ', this.state);
   };
 }
 

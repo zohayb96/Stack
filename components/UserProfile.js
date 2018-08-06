@@ -39,16 +39,16 @@ class UserProfile extends Component {
     const { navigation } = this.props;
     const user = navigation.getParam('user');
     const userData = await axios.get(
-      `http://192.168.1.11:1337/api/users/${user.id}`
+      `http://192.168.1.16:1337/api/users/${user.id}`
     );
     const createdOriginalPostsData = await axios.get(
-      `http://192.168.1.11:1337/api/Oposts/${user.id}`
+      `http://192.168.1.16:1337/api/Oposts/${user.id}`
     );
     const completedPostsData = await axios.get(
-      `http://192.168.1.11:1337/api/posts/completed/${user.id}`
+      `http://192.168.1.16:1337/api/posts/completed/${user.id}`
     );
     const pendingPostData = await axios.get(
-      `http://192.168.1.11:1337/api/posts/pending/${user.id}`
+      `http://192.168.1.16:1337/api/posts/pending/${user.id}`
     );
     this.setState({
       user: userData.data,

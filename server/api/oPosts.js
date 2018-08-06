@@ -22,6 +22,20 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+// Create original post
+router.post('/create', async (req, res, next) => {
+  try {
+    const newOriginalPost = await OriginalPost.create(req.body);
+    if (newOriginalPost) {
+      res.status(201).json(newOriginalPost);
+    } else {
+      res.sendStatus(500);
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Get all data with accepted true - to be viewed by users on map
 router.get('/forUsers', async (req, res, next) => {
   try {

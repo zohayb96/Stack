@@ -211,7 +211,7 @@ export default createBottomTabNavigator(
         } else if (routeName === 'Custom') {
           iconName = `ios-cube${focused ? '' : '-outline'}`;
         } else if (routeName === 'Surprise') {
-          iconName = `ios-love${focused ? '' : '-outline'}`;
+          iconName = `ios-help-circle${focused ? '' : '-outline'}`;
         } else if (routeName === 'Angry') {
           iconName = `ios-alert${focused ? '' : '-outline'}`;
         }

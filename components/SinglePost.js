@@ -48,7 +48,7 @@ class SinglePost extends Component {
     };
     console.log(dataToSend);
     try {
-      await axios.post(`http://192.168.1.11:1337/api/posts/create`, {
+      await axios.post(`http://192.168.1.16:1337/api/posts/create`, {
         originalPostId: postId,
         issuedToId: userId,
         accepted: true,
